@@ -33,7 +33,7 @@ describe('ConceptsService', () => {
   it('should make http get call to get app config', function () {
     service.getAppConfig().subscribe();
 
-    const testRequest = httpMock.expectOne(Constants.CONFIG_FILE_PATH);
+    const testRequest = httpMock.expectOne(Constants.CLINICAL_APP_CONFIG_FILE_PATH);
     expect(testRequest.request.method).toBe('GET');
   });
 

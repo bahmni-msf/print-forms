@@ -7,6 +7,6 @@ export class Constants {
     '=custom:(setMembers:(display))';
   public static FORM_DETAILS_URL = 'concept?s=byFullySpecifiedName&locale=en&name=';
   public static BAHMNI_RESOURCE_URL = '&v=bahmni';
-  public static CONFIG_FILE_PATH = '../bahmni_config/openmrs/apps/clinical/app.json';
+  public static CLINICAL_APP_CONFIG_FILE_PATH = '../bahmni_config/openmrs/apps/clinical/app.json';
 }
 

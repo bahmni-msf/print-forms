@@ -20,6 +20,6 @@ export class ConceptsService {
   }
 
   getAppConfig() {
-    return this.http.get(Constants.CONFIG_FILE_PATH);
+    return this.http.get(Constants.CLINICAL_APP_CONFIG_FILE_PATH);
   }
 }

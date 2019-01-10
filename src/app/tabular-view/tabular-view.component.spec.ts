@@ -3,9 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabularViewComponent } from './tabular-view.component';
 import { ConceptSetComponent } from '../concept-set/concept-set.component';
 import { TextBoxComponent } from '../elements/text-box/text-box.component';
-import { ConceptComponent } from '../concept/concept.component';
 import { ConceptUtils } from '../utils/concept.utils';
 import { CheckBoxComponent } from '../elements/check-box/check-box.component';
+import { ConditionalConceptComponent } from '../conditional-concept/conditional-concept.component';
+import { ConceptComponent } from '../concept/concept.component';
+import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
 
 describe('TabularViewComponent', () => {
   let component: TabularViewComponent;
@@ -14,7 +16,8 @@ describe('TabularViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConceptSetComponent, ConceptComponent, TextBoxComponent, TabularViewComponent, CheckBoxComponent ]
+      declarations: [ ConceptSetComponent, ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent,
+        TextBoxComponent, TabularViewComponent, CheckBoxComponent ]
     })
     .compileComponents();
   }));
@@ -72,7 +75,7 @@ describe('TabularViewComponent', () => {
     expect(compiled.getElementsByClassName('concept-name').length).toBe(0);
   });
 
-  it('should display app-concept for setMembers when set property is false ', function () {
+  it('should display app-conditional-concept for setMembers when set property is false ', function () {
     component.member = {
       name: 'test member', setMembers: [
         {name: 'member1', set: false},
@@ -81,12 +84,11 @@ describe('TabularViewComponent', () => {
     };
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-
-    expect(compiled.querySelectorAll('app-concept').length).toBe(2);
-    expect(compiled.querySelector('app-concept')).not.toBeNull();
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(2);
+    expect(compiled.querySelector('app-conditional-concept')).not.toBeNull();
   });
 
-  it('should display app-concept for 2nd level of setMembers when set property is false ', function () {
+  it('should display app-conditional-concept for 2nd level of setMembers when set property is false ', function () {
     component.member = {
       name: 'test member', setMembers: [
         {
@@ -99,8 +101,8 @@ describe('TabularViewComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelectorAll('app-concept').length).toBe(2);
-    expect(compiled.querySelector('app-concept')).not.toBeNull();
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(2);
+    expect(compiled.querySelector('app-conditional-concept')).not.toBeNull();
   });
 
   it('should display app-concept-set for 2nd level of setMembers when set property is true' +
@@ -120,7 +122,7 @@ describe('TabularViewComponent', () => {
 
     expect(compiled.querySelectorAll('app-concept-set').length).toBe(2);
     expect(compiled.querySelector('app-concept-set')).not.toBeNull();
-    expect(compiled.querySelector('app-concept')).toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).toBeNull();
   });
 
   it('should display app-tabular-view for 2nd level of setMembers when set property and isTabular is true ', function () {

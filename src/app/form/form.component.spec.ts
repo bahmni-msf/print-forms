@@ -14,6 +14,8 @@ import { CheckBoxComponent } from '../elements/check-box/check-box.component';
 import { CodeSheetComponent } from '../code-sheet/code-sheet.component';
 import { CodeConceptComponent } from '../code-sheet/code-concept/code-concept.component';
 import { CodeConceptSetComponent } from '../code-sheet/code-concept-set/code-concept-set.component';
+import { ConditionalConceptComponent } from '../conditional-concept/conditional-concept.component';
+import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -25,8 +27,8 @@ describe('FormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FormComponent, ConceptSetComponent, ConceptComponent, TextBoxComponent, TabularViewComponent,
-        CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent],
+      declarations: [FormComponent, ConceptSetComponent, ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent,
+        TextBoxComponent, TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent],
       providers: [{provide: ActivatedRoute, useValue: {params: from([{formName: 'test form'}])}},
         {provide: ConceptsService, useValue: conceptServiceMock}]
     })
@@ -115,9 +117,9 @@ describe('FormComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
 
     expect(compiled.querySelectorAll('app-concept-set').length).toBe(1);
-    expect(compiled.querySelectorAll('app-concept').length).toBe(1);
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(1);
     expect(compiled.querySelector('app-concept-set')).not.toBeNull();
-    expect(compiled.querySelector('app-concept')).not.toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).not.toBeNull();
   });
 
   it('should call isTabular method of conceptUtils', () => {

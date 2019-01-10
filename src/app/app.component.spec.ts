@@ -18,6 +18,8 @@ import { CheckBoxComponent } from './elements/check-box/check-box.component';
 import { CodeSheetComponent } from './code-sheet/code-sheet.component';
 import { CodeConceptComponent } from './code-sheet/code-concept/code-concept.component';
 import { CodeConceptSetComponent } from './code-sheet/code-concept-set/code-concept-set.component';
+import { ConditionalConceptComponent } from './conditional-concept/conditional-concept.component';
+import { ConceptConditionComponent } from './concept-condition/concept-condition.component';
 
 describe('AppComponent', () => {
   const UserServiceMock: UserService = mock(UserService);
@@ -39,6 +41,8 @@ describe('AppComponent', () => {
         FormListComponent,
         ConceptSetComponent,
         ConceptComponent,
+        ConditionalConceptComponent,
+        ConceptConditionComponent,
         TextBoxComponent,
         TabularViewComponent,
         CheckBoxComponent,

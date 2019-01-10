@@ -6,6 +6,8 @@ import { TextBoxComponent } from '../elements/text-box/text-box.component';
 import { TabularViewComponent } from '../tabular-view/tabular-view.component';
 import { ConceptUtils } from '../utils/concept.utils';
 import { CheckBoxComponent } from '../elements/check-box/check-box.component';
+import { ConditionalConceptComponent } from '../conditional-concept/conditional-concept.component';
+import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
 
 describe('ConceptSetComponent', () => {
   let component: ConceptSetComponent;
@@ -14,7 +16,8 @@ describe('ConceptSetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConceptSetComponent, ConceptComponent, TextBoxComponent, TabularViewComponent, CheckBoxComponent ]
+      declarations: [ ConceptSetComponent, ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent,
+        TextBoxComponent, TabularViewComponent, CheckBoxComponent ]
     })
     .compileComponents();
   }));
@@ -44,9 +47,9 @@ describe('ConceptSetComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
 
     expect(compiled.querySelectorAll('app-concept-set').length).toBe(1);
-    expect(compiled.querySelectorAll('app-concept').length).toBe(1);
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(1);
     expect(compiled.querySelector('app-concept-set')).not.toBeNull();
-    expect(compiled.querySelector('app-concept')).not.toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).not.toBeNull();
   });
 
   it('should display only concept component when set members are not concept sets', function () {
@@ -54,8 +57,8 @@ describe('ConceptSetComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelectorAll('app-concept').length).toBe(2);
-    expect(compiled.querySelector('app-concept')).not.toBeNull();
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(2);
+    expect(compiled.querySelector('app-conditional-concept')).not.toBeNull();
     expect(compiled.querySelector('app-concept-set')).toBeNull();
   });
 
@@ -67,7 +70,7 @@ describe('ConceptSetComponent', () => {
 
     expect(compiled.querySelectorAll('app-concept-set').length).toBe(3);
     expect(compiled.querySelector('app-concept-set')).not.toBeNull();
-    expect(compiled.querySelector('app-concept')).toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).toBeNull();
   });
 
   it('should not display concept and concept-set components when set-members list is empty', function () {
@@ -76,7 +79,7 @@ describe('ConceptSetComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
 
     expect(compiled.querySelector('app-concept-set')).toBeNull();
-    expect(compiled.querySelector('app-concept')).toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).toBeNull();
   });
 
   it('should call isAbnormal in ConceptUtils on ngOnInt call', function () {
@@ -127,7 +130,7 @@ describe('ConceptSetComponent', () => {
     expect(compiled.querySelector('app-tabular-view')).not.toBeNull();
   });
 
-  it('should display app-concept for 2nd level setMembers of tabular-concept ' +
+  it('should display app-conditional-concept for 2nd level setMembers of tabular-concept ' +
     ' when set property is false ', function () {
     component.member = {
       name: 'test member', setMembers: [
@@ -141,8 +144,8 @@ describe('ConceptSetComponent', () => {
 
     expect(compiled.querySelectorAll('app-tabular-view').length).toBe(2);
     expect(compiled.querySelector('app-tabular-view')).not.toBeNull();
-    expect(compiled.querySelectorAll('app-concept').length).toBe(1);
-    expect(compiled.querySelector('app-concept')).not.toBeNull();
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(1);
+    expect(compiled.querySelector('app-conditional-concept')).not.toBeNull();
   });
 
   it('should not display app-tabular-view when isTabular property is false', function () {
@@ -167,7 +170,7 @@ describe('ConceptSetComponent', () => {
     spyOn(ConceptUtils, 'isTabular').and.returnValue(true);
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelectorAll('app-concept').length).toBe(1);
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(1);
     expect(compiled.querySelector('app-tabular-view')).toBeNull();
   });
 

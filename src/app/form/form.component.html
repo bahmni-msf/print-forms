@@ -7,7 +7,7 @@
   </div>
   <div *ngIf="isFormSelected">
     <div *ngFor="let member of form.setMembers">
-      <app-concept *ngIf="!member.set" [member]="member"></app-concept>
+      <app-conditional-concept *ngIf="!member.set" [member]="member"></app-conditional-concept>
       <app-concept-set *ngIf="member.set && !isTabular(member)" [member]="member"></app-concept-set>
       <app-tabular-view *ngIf="member.set && isTabular(member)" [member]="member"></app-tabular-view>
     </div>

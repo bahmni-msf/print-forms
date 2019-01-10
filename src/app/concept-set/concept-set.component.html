@@ -4,7 +4,7 @@
     <button class="add-more" *ngIf="member.config && member.config.allowAddMore" disabled>[+]</button>
   </div>
   <div *ngFor="let member of member.setMembers">
-    <app-concept *ngIf="!member.set" [member]="member"></app-concept>
+    <app-conditional-concept *ngIf="!member.set" [member]="member"></app-conditional-concept>
     <app-tabular-view *ngIf="member.set && isTabular(member)" [member]="member"></app-tabular-view>
     <app-concept-set *ngIf="member.set && !isTabular(member)" [member]="member"></app-concept-set>
   </div>

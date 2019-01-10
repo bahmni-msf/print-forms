@@ -19,6 +19,8 @@ import { CheckBoxComponent } from './elements/check-box/check-box.component';
 import { CodeSheetComponent } from './code-sheet/code-sheet.component';
 import { CodeConceptComponent } from './code-sheet/code-concept/code-concept.component';
 import { CodeConceptSetComponent } from './code-sheet/code-concept-set/code-concept-set.component';
+import { ConditionalConceptComponent } from './conditional-concept/conditional-concept.component';
+import { ConceptConditionComponent } from './concept-condition/concept-condition.component';
 
 describe('AppRoutingModule', () => {
   let location: Location;
@@ -33,8 +35,8 @@ describe('AppRoutingModule', () => {
         HttpClientTestingModule
       ],
       declarations: [
-        AppComponent, FormComponent, HeaderComponent, FormListComponent,
-        ErrorMessageComponent, FilterPipe, ConceptComponent, ConceptSetComponent, TextBoxComponent,
+        AppComponent, FormComponent, HeaderComponent, FormListComponent, ErrorMessageComponent, FilterPipe,
+        ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent, ConceptSetComponent, TextBoxComponent,
         TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent,
       ]
     });

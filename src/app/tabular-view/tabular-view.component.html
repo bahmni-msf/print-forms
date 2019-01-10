@@ -3,9 +3,9 @@
   <div class="container">
     <div class= "container-element" *ngFor="let member of member.setMembers">
         <div class="concept-name">{{member.name}}</div>
-      <app-concept *ngIf="!member.set" [member]="member"></app-concept>
+      <app-conditional-concept *ngIf="!member.set" [member]="member"></app-conditional-concept>
       <div *ngFor="let tabularMember of member.setMembers">
-        <app-concept *ngIf="!tabularMember.set" [member]="tabularMember"></app-concept>
+        <app-conditional-concept *ngIf="!tabularMember.set" [member]="tabularMember"></app-conditional-concept>
         <app-tabular-view *ngIf="tabularMember.set && isTabular(tabularMember)" [member]="tabularMember"></app-tabular-view>
         <app-concept-set *ngIf="tabularMember.set && !isTabular(tabularMember) " [member]="tabularMember"></app-concept-set>
       </div>

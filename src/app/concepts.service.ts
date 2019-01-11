@@ -22,4 +22,8 @@ export class ConceptsService {
   getAppConfig() {
     return this.http.get(Constants.CLINICAL_APP_CONFIG_FILE_PATH);
   }
+
+  getFormConditionsConfig() {
+    return this.http.get(Constants.FORM_CONDITIONS_CONFIG_FILE_PATH);
+  }
 }

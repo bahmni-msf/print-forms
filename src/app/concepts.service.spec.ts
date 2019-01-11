@@ -44,4 +44,11 @@ describe('ConceptsService', () => {
       'name' + Constants.BAHMNI_RESOURCE_URL);
     expect(testRequest.request.method).toBe('GET');
   });
+
+  it('should make http get call to get form conditions config', function () {
+    service.getFormConditionsConfig().subscribe();
+
+    const testRequest = httpMock.expectOne(Constants.FORM_CONDITIONS_CONFIG_FILE_PATH);
+    expect(testRequest.request.method).toBe('GET');
+  });
 });

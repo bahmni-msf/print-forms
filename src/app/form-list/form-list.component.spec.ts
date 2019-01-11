@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormListComponent } from './form-list.component';
+import { formConditions, FormListComponent } from './form-list.component';
 import { FilterPipe } from '../filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { ConceptsService } from '../concepts.service';
@@ -25,6 +25,7 @@ describe('FormListComponent', () => {
     fixture = TestBed.createComponent(FormListComponent);
     component = fixture.componentInstance;
     when(ConceptServiceMock.getAllObservationTemplates()).thenReturn(mock(Observable));
+    when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(mock(Observable));
   }));
 
   it('should create Form list component', () => {
@@ -66,10 +67,11 @@ describe('FormListComponent', () => {
 
   });
 
-  it('should call getAllObservationTemplates on app initialization', () => {
+  it('should call getAllObservationTemplates and getFormConditions on app initialization', () => {
     component.ngOnInit();
 
     verify(ConceptServiceMock.getAllObservationTemplates()).called();
+    verify(ConceptServiceMock.getFormConditionsConfig()).called();
   });
 
   it('should have list of form names, when httpResponse have data on app initialization', () => {
@@ -85,10 +87,29 @@ describe('FormListComponent', () => {
     expect(component.formNames).toEqual(['History and Examination', 'Vitals', 'Second Vitals']);
   });
 
-  it('formNames should be undefined, when httpResponse doesn\'t have data', () => {
+  it('formNames and formConditions should be undefined, when httpResponse doesn\'t have data', () => {
     component.ngOnInit();
 
     expect(component.formNames).toBeUndefined();
+    expect(formConditions).toBeUndefined();
   });
 
+  it('should have list of formConditions, when httpResponse have data on app initialization', () => {
+    const testResponse = from([{
+        condition: 'condition',
+        conceptsToShow: [],
+        nestedConditions: [],
+        conceptsToHide: []
+    }]);
+    when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(testResponse);
+
+    component.ngOnInit();
+
+    expect(formConditions.toString()).toEqual([{
+      condition: 'condition',
+      conceptsToShow: [],
+      nestedConditions: [],
+      conceptsToHide: []
+    }].toString());
+  });
 });

@@ -113,7 +113,7 @@ describe('FormComponent', () => {
     expect(formConfigBuilder).toHaveBeenCalledWith('formDetails', 'appConfig' );
   });
 
-  xit('should display concept and concept-set component when set members list is not empty', function () {
+  it('should display concept and concept-set component when set members list is not empty', function () {
     component.form = {name: 'test form', setMembers : [{name: 'member1', set: true, setMembers: []}, {name: 'member2', set: false}]};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
@@ -147,7 +147,7 @@ describe('FormComponent', () => {
     expect(compiled.querySelector('app-tabular-view')).not.toBeNull();
   });
 
-  xit('should not display app-tabular-view when isTabular property is false', function () {
+  it('should not display app-tabular-view when isTabular property is false', function () {
     component.form = {
       name: 'test member', setMembers: [ { name: 'member1', set: true, config: {isTabular: false}, setMembers: []},
         { name: 'member2', set: true, config: {isTabular: false}, setMembers: []}
@@ -191,23 +191,5 @@ describe('FormComponent', () => {
     component.setIsFormSelected(false);
     expect(component.isFormSelected).toBeFalsy();
 
-  });
-
-  it('should not render concept if rendered is true', function () {
-    component.form = {
-      name: 'test form',
-      setMembers : [
-        {
-          name: 'member2',
-          set: false,
-          rendered: true
-        }]};
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-
-    expect(compiled.querySelectorAll('app-concept-set').length).toBe(0);
-    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(0);
-    expect(compiled.querySelector('app-concept-set')).toBeNull();
-    expect(compiled.querySelector('app-conditional-concept')).toBeNull();
   });
 });

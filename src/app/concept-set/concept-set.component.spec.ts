@@ -27,26 +27,30 @@ describe('ConceptSetComponent', () => {
     fixture = TestBed.createComponent(ConceptSetComponent);
     component = fixture.componentInstance;
     component.member = {name: 'test member', set: true, setMembers: []};
-    fixture.detectChanges();
   });
 
   it('should create concept-set component', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should display div elements with classes concept-set and concept-set-section', () => {
-    const compiled = fixture.debugElement.nativeElement;
-
-    expect(compiled.querySelectorAll('div')[0].getAttribute('class')).toEqual('concept-set-section');
-    expect(compiled.querySelectorAll('div')[1].getAttribute('class')).toEqual('concept-set');
-    expect(compiled.querySelectorAll('div')[1].innerText).toEqual('test member');
-  });
-
-  it('should display concept and concept-set component when set members list is not empty', function () {
-    component.member = {name: 'test member', setMembers : [{name: 'member1', set: true, setMembers: []}, {name: 'member2', set: false}]};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
+    expect(compiled.querySelectorAll('div')[1].getAttribute('class')).toEqual('concept-set-section');
+    expect(compiled.querySelectorAll('div')[2].getAttribute('class')).toEqual('concept-set');
+    expect(compiled.querySelectorAll('div')[2].innerText).toEqual('test member');
+  });
+
+  it('should display concept and concept-set component when set members list is not empty', function () {
+    component.member = {name: 'test member', rendered: false,
+      setMembers : [{name: 'member1', set: true, setMembers: [], rendered: false}, {name: 'member2', set: false, rendered: false}]};
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelectorAll('div')[1].getAttribute('class')).toEqual('concept-set-section');
+    expect(compiled.querySelectorAll('div')[2].getAttribute('class')).toEqual('concept-set');
     expect(compiled.querySelectorAll('app-concept-set').length).toBe(1);
     expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(1);
     expect(compiled.querySelector('app-concept-set')).not.toBeNull();
@@ -75,7 +79,7 @@ describe('ConceptSetComponent', () => {
   });
 
   it('should not display concept and concept-set components when set-members list is empty', function () {
-    component.member = {name: 'test member'};
+    component.member = {name: 'test member', setMembers: []};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
@@ -176,14 +180,14 @@ describe('ConceptSetComponent', () => {
   });
 
   it('should have + button when config allowAddMore  is true', function () {
-    component.member = { name : 'test member', datatype: 'Text', config: {allowAddMore: true}};
+    component.member = { name : 'test member', datatype: 'Text', config: {allowAddMore: true}, setMembers: []};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.getElementsByClassName('add-more').length).toBe(1);
   });
 
   it('should not have + button when config allowAddMore  is not true', function () {
-    component.member = { name : 'test member', datatype: 'Text'};
+    component.member = { name : 'test member', datatype: 'Text', setMembers: []};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.getElementsByClassName('add-more').length).toBe(0);

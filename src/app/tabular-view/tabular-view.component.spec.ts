@@ -27,16 +27,16 @@ describe('TabularViewComponent', () => {
     fixture = TestBed.createComponent(TabularViewComponent);
     component = fixture.componentInstance;
     component.member = {setMembers: []};
-    fixture.detectChanges();
   });
 
   it('should create Tabular view component', () => {
-
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should call isTabular method of conceptUtils', () => {
     const member = {};
+    fixture.detectChanges();
     conceptUtils = spyOn(ConceptUtils, 'isTabular');
     component.isTabular(member);
 
@@ -62,7 +62,7 @@ describe('TabularViewComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelectorAll('div')[3].getAttribute('class')).toEqual('concept-name');
+    expect(compiled.querySelectorAll('div')[4].getAttribute('class')).toEqual('concept-name');
     expect(compiled.getElementsByClassName('concept-name').length).toBe(2);
   });
 

@@ -27,10 +27,10 @@ describe('ConditionalConceptComponent', () => {
     fixture = TestBed.createComponent(ConditionalConceptComponent);
     component = fixture.componentInstance;
     component.member = {name: 'member'};
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 

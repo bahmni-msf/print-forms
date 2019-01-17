@@ -27,4 +27,15 @@ export class ConceptUtils {
     }
     return false;
   }
+
+  public static isElementRendered(member) {
+    if (member) {
+      if (member.rendered === true) {
+        return true;
+      } else {
+        member.rendered = true;
+        return false;
+      }
+    }
+  }
 }

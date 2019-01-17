@@ -29,10 +29,11 @@ export class FormElementsComponent implements OnInit {
 
   private setRenderedToFalse(concept: any) {
     if (concept) {
+      concept.rendered = false;
       if (!concept.setMembers) {
         concept.rendered = false;
       } else {
-        concept.setMembers.map(member => this.setRenderedToFalse(member));
+        concept.setMembers.forEach(member => this.setRenderedToFalse(member));
       }
     }
   }

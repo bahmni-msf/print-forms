@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ConceptUtils } from '../utils/concept.utils';
 
 @Component({
   selector: 'app-tabular-view',
   templateUrl: './tabular-view.component.html',
-  styleUrls: ['./tabular-view.component.scss']
+  styleUrls: ['./tabular-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabularViewComponent {
 
@@ -14,5 +15,9 @@ export class TabularViewComponent {
 
   isTabular(member) {
     return  ConceptUtils.isTabular(member);
+  }
+
+  isElementRendered() {
+    return ConceptUtils.isElementRendered(this.member);
   }
 }

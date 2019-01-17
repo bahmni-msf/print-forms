@@ -1,24 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-concept',
   templateUrl: './concept.component.html',
-  styleUrls: ['./concept.component.scss']
+  styleUrls: ['./concept.component.scss'],
 })
-export class ConceptComponent implements OnInit {
+export class ConceptComponent {
 
   @Input() member: any;
 
   constructor() {
-  }
-
-  ngOnInit() {
-    this.setRenderedToTrue();
-  }
-
-  private setRenderedToTrue() {
-    if (this.member) {
-      this.member.rendered = true;
-    }
   }
 }

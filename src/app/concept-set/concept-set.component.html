@@ -1,3 +1,4 @@
+<div *ngIf="!isElementRendered()">
 <div class="concept-set-section" *ngIf="!abnormal">
   <div class="concept-set">
     {{member.name}}
@@ -9,6 +10,7 @@
       <app-concept-set *ngIf="setMember.set && !isTabular(setMember)" [member]="setMember" [formConcepts]="member.setMembers"></app-concept-set>
 
   </div>
+</div>
 </div>
 <div *ngIf="abnormal">
   <app-concept [member]="getMergedAbnormalConcept()"></app-concept>

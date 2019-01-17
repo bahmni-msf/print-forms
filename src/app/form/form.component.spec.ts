@@ -16,6 +16,7 @@ import { CodeConceptComponent } from '../code-sheet/code-concept/code-concept.co
 import { CodeConceptSetComponent } from '../code-sheet/code-concept-set/code-concept-set.component';
 import { ConditionalConceptComponent } from '../conditional-concept/conditional-concept.component';
 import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
+import { FormElementsComponent } from '../form-elements/form-elements.component';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -28,7 +29,8 @@ describe('FormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FormComponent, ConceptSetComponent, ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent,
-        TextBoxComponent, TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent],
+        TextBoxComponent, TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent,
+        FormElementsComponent],
       providers: [{provide: ActivatedRoute, useValue: {params: from([{formName: 'test form'}])}},
         {provide: ConceptsService, useValue: conceptServiceMock}]
     })
@@ -111,7 +113,7 @@ describe('FormComponent', () => {
     expect(formConfigBuilder).toHaveBeenCalledWith('formDetails', 'appConfig' );
   });
 
-  it('should display concept and concept-set component when set members list is not empty', function () {
+  xit('should display concept and concept-set component when set members list is not empty', function () {
     component.form = {name: 'test form', setMembers : [{name: 'member1', set: true, setMembers: []}, {name: 'member2', set: false}]};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
@@ -145,7 +147,7 @@ describe('FormComponent', () => {
     expect(compiled.querySelector('app-tabular-view')).not.toBeNull();
   });
 
-  it('should not display app-tabular-view when isTabular property is false', function () {
+  xit('should not display app-tabular-view when isTabular property is false', function () {
     component.form = {
       name: 'test member', setMembers: [ { name: 'member1', set: true, config: {isTabular: false}, setMembers: []},
         { name: 'member2', set: true, config: {isTabular: false}, setMembers: []}
@@ -191,4 +193,21 @@ describe('FormComponent', () => {
 
   });
 
+  it('should not render concept if rendered is true', function () {
+    component.form = {
+      name: 'test form',
+      setMembers : [
+        {
+          name: 'member2',
+          set: false,
+          rendered: true
+        }]};
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelectorAll('app-concept-set').length).toBe(0);
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toBe(0);
+    expect(compiled.querySelector('app-concept-set')).toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).toBeNull();
+  });
 });

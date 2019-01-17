@@ -49,15 +49,21 @@ describe('Form Config Builder', () => {
         datatype: 'N/A',
         setMembers: [{name: 'Weight', set: false, datatype: 'date', config: undefined,
           units: 'KG',
-          answers: [], class: 'Misc',  range: [72, 72]}],
+          answers: [], class: 'Misc',  range: [72, 72],
+          fullySpecifiedName: 'Weight',
+          rendered: false}],
         answers: [],
         class: 'Misc',
         config: {allowAddMore: true},
-        range: [undefined, undefined]
+        range: [undefined, undefined],
+        fullySpecifiedName: 'Heart Rate',
+        rendered: false
       }], config: {showPanelView: false},
       answers: [],
       class: 'Misc',
-      range: [undefined, undefined]
+      range: [undefined, undefined],
+      fullySpecifiedName: 'Vitals',
+      rendered: false
     };
 
     const actualConfig = FormConfigBuilder.build(formDetails, appConfig);
@@ -89,7 +95,9 @@ describe('Form Config Builder', () => {
       config: {showPanelView: false},
       answers: [],
       class: 'Misc',
-      range: [undefined, undefined]
+      range: [undefined, undefined],
+      fullySpecifiedName: 'Vitals',
+      rendered: false
     };
 
     const actualConfig = FormConfigBuilder.build(formDetails, appConfig);
@@ -122,7 +130,9 @@ describe('Form Config Builder', () => {
       config: {showPanelView: false},
       answers: [],
       class: 'Misc',
-      range: [undefined, undefined]
+      range: [undefined, undefined],
+      fullySpecifiedName: 'Vitals',
+      rendered: false
     };
 
     const actualConfig = FormConfigBuilder.build(formDetails, appConfig);
@@ -154,7 +164,9 @@ describe('Form Config Builder', () => {
       config: {showPanelView: false},
       answers: ['Abdominal pain', 'Abdominal Lump', 'Anorexia'],
       class: 'Misc',
-      range: [undefined, undefined]
+      range: [undefined, undefined],
+      fullySpecifiedName: 'Vitals',
+      rendered: false
     };
 
     const actualConfig = FormConfigBuilder.build(formDetails, appConfig);
@@ -188,7 +200,9 @@ describe('Form Config Builder', () => {
       config: {showPanelView: false},
       answers: [],
       class: 'Misc',
-      range: [undefined, undefined]
+      range: [undefined, undefined],
+      fullySpecifiedName: 'Vitals',
+      rendered: false
     };
 
     const actualConfig = FormConfigBuilder.build(formDetails, appConfig);
@@ -221,7 +235,9 @@ describe('Form Config Builder', () => {
       config: {showPanelView: false},
       answers: [],
       class: 'Misc',
-      range: [undefined, undefined]
+      range: [undefined, undefined],
+      fullySpecifiedName: 'Vitals',
+      rendered: false
     };
 
     const actualConfig = FormConfigBuilder.build(formDetails, appConfig);

@@ -5,9 +5,20 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './concept.component.html',
   styleUrls: ['./concept.component.scss']
 })
-export class ConceptComponent {
+export class ConceptComponent implements OnInit {
 
   @Input() member: any;
 
-  constructor() { }
+  constructor() {
+  }
+
+  ngOnInit() {
+    this.setRenderedToTrue();
+  }
+
+  private setRenderedToTrue() {
+    if (this.member) {
+      this.member.rendered = true;
+    }
+  }
 }

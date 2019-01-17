@@ -8,6 +8,7 @@ import { CheckBoxComponent } from '../elements/check-box/check-box.component';
 import { ConditionalConceptComponent } from '../conditional-concept/conditional-concept.component';
 import { ConceptComponent } from '../concept/concept.component';
 import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
+import { FormElementsComponent } from '../form-elements/form-elements.component';
 
 describe('TabularViewComponent', () => {
   let component: TabularViewComponent;
@@ -17,7 +18,7 @@ describe('TabularViewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ConceptSetComponent, ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent,
-        TextBoxComponent, TabularViewComponent, CheckBoxComponent ]
+        TextBoxComponent, TabularViewComponent, CheckBoxComponent, FormElementsComponent ]
     })
     .compileComponents();
   }));

@@ -49,4 +49,18 @@ export class FormComponent {
       formElement.scrollTop = 0;
     }
   }
+
+  isElementNotRendered(member) {
+    if (!member.setMembers) {
+      if (!member.rendered) {
+        return true;
+      }
+    } else {
+      for (let i = 0; i < member.setMembers.length; i ++) {
+        if (!member.setMembers[i].rendered) {
+          return true;
+        }
+      }
+    }
+  }
 }

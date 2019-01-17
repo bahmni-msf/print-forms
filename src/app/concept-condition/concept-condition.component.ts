@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-concept-condition',
   templateUrl: './concept-condition.component.html',
   styleUrls: ['./concept-condition.component.scss']
 })
-export class ConceptConditionComponent implements OnInit {
+export class ConceptConditionComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  @Input() conceptConditions: any;
+  @Input() formConcepts: any;
 }

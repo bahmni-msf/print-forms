@@ -1,3 +1,14 @@
-<p>
-  concept-condition works!
-</p>
+<div *ngFor="let conceptCondition of conceptConditions">
+  <div *ngIf="(conceptCondition.nestedConditions && conceptCondition.nestedConditions.length) > 0
+            || (conceptCondition.conceptsToShow && conceptCondition.conceptsToShow.length) > 0"
+       class="concept-condition-section">
+    <p *ngIf="conceptCondition.condition" class="condition">{{conceptCondition.condition}}</p>
+    <div *ngFor="let conceptName of conceptCondition.conceptsToShow">
+      <app-form-elements [conceptName]="conceptName" [formConcepts]="formConcepts"></app-form-elements>
+    </div>
+    <app-concept-condition *ngIf="conceptCondition.nestedConditions"
+                           [conceptConditions]="conceptCondition.nestedConditions"
+                           [formConcepts]="formConcepts">
+    </app-concept-condition>
+  </div>
+</div>

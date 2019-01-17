@@ -3,7 +3,7 @@
   <div class="container">
     <div class= "container-element" *ngFor="let member of member.setMembers">
         <div class="concept-name">{{member.name}}</div>
-      <app-conditional-concept *ngIf="!member.set" [member]="member"></app-conditional-concept>
+      <app-conditional-concept *ngIf="!member.set" [member]="member" [formConcepts]="formConcepts"></app-conditional-concept>
       <div *ngFor="let tabularMember of member.setMembers">
         <app-conditional-concept *ngIf="!tabularMember.set" [member]="tabularMember"></app-conditional-concept>
         <app-tabular-view *ngIf="tabularMember.set && isTabular(tabularMember)" [member]="tabularMember"></app-tabular-view>

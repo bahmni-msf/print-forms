@@ -1,0 +1,11 @@
+<div>
+  <div *ngIf="concept">
+    <app-conditional-concept *ngIf="!concept.set" [member]="concept"
+                             [formConcepts]="formConcepts">
+    </app-conditional-concept>
+    <app-concept-set *ngIf="concept.set && !isTabular(concept)" [member]="concept"
+                     [formConcepts]="formConcepts"></app-concept-set>
+    <app-tabular-view *ngIf="concept.set && isTabular(concept)" [member]="concept"
+                      [formConcepts]="formConcepts"></app-tabular-view>
+  </div>
+</div>

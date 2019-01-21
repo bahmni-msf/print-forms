@@ -193,5 +193,27 @@ describe('ConceptSetComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.getElementsByClassName('add-more').length).toBe(0);
   });
-});
 
+  it('should not create any elements if the concepts are rendered', function () {
+    component.member = {
+      name: 'test',
+      set: true,
+      rendered: true,
+      setMembers: [{
+        name: 'conceptA',
+        set: false,
+        rendered: true
+      },
+      ]
+    };
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.getElementsByClassName('div').length).toBe(0);
+  });
+
+  it('should set rendered true before rendering the member', function () {
+    component.member = {name: 'member', set: true, rendered: false, setMembers: []};
+    fixture.detectChanges();
+    expect(component.member.rendered).toBe(true);
+  });
+});

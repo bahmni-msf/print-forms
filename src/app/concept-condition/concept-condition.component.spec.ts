@@ -70,6 +70,20 @@ describe('ConceptConditionComponent', () => {
     expect(compiled.querySelectorAll('app-form-elements').length).toBe(2);
   });
 
+  it('should not create form-elements element if there are no conceptsToShow ' +
+    'in conceptConditions', () => {
+    component.conceptConditions = [{
+      condition: 'some condition',
+      conceptsToShow: [],
+      nestedConditions: {
+        condition: 'condition'
+      }
+    }];
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelectorAll('app-form-elements').length).toBe(0);
+  });
+
   it('should not create concept-condition element if there is no nestedCondition ' +
     'in conceptConditions', () => {
     component.conceptConditions = [{

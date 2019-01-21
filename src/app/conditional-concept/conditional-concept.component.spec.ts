@@ -52,4 +52,20 @@ describe('ConditionalConceptComponent', () => {
 
     expect(compiled.querySelectorAll('app-concept-condition').length).toBe(0);
   });
+
+  it('should not create concept and concept condition when concept is rendered', function () {
+    component.member = {name: 'member', set: false, rendered: true};
+    component.conceptConditions = undefined;
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelectorAll('app-concept').length).toBe(0);
+    expect(compiled.querySelectorAll('app-concept-condition').length).toBe(0);
+  });
+
+  it('should set rendered true before rendering concept', function () {
+    component.member = {name: 'member', set: false, rendered: false};
+    fixture.detectChanges();
+    expect(component.member.rendered).toBe(true);
+  });
 });

@@ -10,7 +10,7 @@ export class FormElementsComponent implements OnInit {
 
   @Input() conceptName: String;
   @Input() formConcepts: any;
-  protected concept;
+  concept: any;
 
   constructor() { }
 

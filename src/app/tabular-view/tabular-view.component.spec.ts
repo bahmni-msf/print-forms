@@ -143,4 +143,27 @@ describe('TabularViewComponent', () => {
     expect(compiled.querySelectorAll('app-tabular-view').length).toBe(2);
     expect(compiled.querySelector('app-tabular-view')).not.toBeNull();
   });
+
+  it('should not create any element when the member is already rendered', function () {
+    component.member = {
+      name: 'test member', setMembers: [
+        {
+          name: 'member1', set: true, setMembers: [
+            {name: 'member1', set: true, rendered: true},
+            {name: 'member2', set: true, rendered: true}], rendered: true
+        }
+      ], rendered: true
+    };
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelectorAll('div').length).toBe(0);
+    expect(compiled.querySelectorAll('app-tabular-view').length).toBe(0);
+  });
+
+  it('should set rendered true before rendering the member', function () {
+    component.member = {name: 'member', set: true, rendered: false, setMembers: []};
+    fixture.detectChanges();
+    expect(component.member.rendered).toBe(true);
+  });
 });

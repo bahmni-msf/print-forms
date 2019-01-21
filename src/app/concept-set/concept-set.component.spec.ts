@@ -106,6 +106,7 @@ describe('ConceptSetComponent', () => {
     fixture.detectChanges();
 
     expect(compiled.querySelectorAll('app-concept').length).toEqual(1);
+    expect(compiled.querySelectorAll('app-conditional-concept').length).toEqual(1);
   });
 
   it('should call isTabular method of conceptUtils', () => {

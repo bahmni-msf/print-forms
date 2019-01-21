@@ -10,5 +10,5 @@
   </div>
 </div>
 <div *ngIf="abnormal">
-  <app-concept [member]="getMergedAbnormalConcept()"></app-concept>
+  <app-conditional-concept [member]="getMergedAbnormalConcept()" [formConcepts]="formConcepts"></app-conditional-concept>
 </div>

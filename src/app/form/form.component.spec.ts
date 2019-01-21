@@ -192,4 +192,26 @@ describe('FormComponent', () => {
     expect(component.isFormSelected).toBeFalsy();
   });
 
+  it('should not render elements if it is in formConditionConcepts', function () {
+    FormComponent.formConditionsConcepts.add('member1');
+    FormComponent.formConditionsConcepts.add('member2');
+    component.form = {fullySpecifiedName: 'test form', setMembers : [{fullySpecifiedName: 'member1',
+        set: true, setMembers: []}, {fullySpecifiedName: 'member2', set: false}]};
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelector('app-concept-set')).toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).toBeNull();
+    expect(compiled.querySelector('app-tabular-view')).toBeNull();
+  });
+
+  it('should render elements if it is in formConditionConcepts', function () {
+    component.form = {fullySpecifiedName: 'test form', name: 'test form', setMembers : [{fullySpecifiedName: 'member1', name: 'member1',
+        set: true, setMembers: []}, {fullySpecifiedName: 'member2', name: 'member2', set: false}]};
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-concept-set')).not.toBeNull();
+    expect(compiled.querySelector('app-conditional-concept')).not.toBeNull();
+  });
+
 });

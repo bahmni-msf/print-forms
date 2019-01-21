@@ -8,6 +8,7 @@ import { CheckBoxComponent } from '../elements/check-box/check-box.component';
 import { FormElementsComponent } from '../form-elements/form-elements.component';
 import { TabularViewComponent } from '../tabular-view/tabular-view.component';
 import { ConceptSetComponent } from '../concept-set/concept-set.component';
+import { FormComponent } from '../form/form.component';
 
 describe('ConceptConditionComponent', () => {
   let component: ConceptConditionComponent;
@@ -25,6 +26,7 @@ describe('ConceptConditionComponent', () => {
     fixture = TestBed.createComponent(ConceptConditionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    FormComponent.formConditionsConcepts = new Set<String>();
   });
 
   it('should create', () => {

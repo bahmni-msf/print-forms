@@ -7,9 +7,11 @@
   </div>
   <div *ngIf="isFormSelected">
     <div *ngFor="let member of form.setMembers">
-      <app-conditional-concept *ngIf="!member.set" [member]="member" [formConcepts]="form.setMembers"></app-conditional-concept>
-      <app-concept-set *ngIf="member.set && !isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-concept-set>
-      <app-tabular-view *ngIf="member.set && isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-tabular-view>
+      <div *ngIf="!isInFormConditions(member)">
+        <app-conditional-concept *ngIf="!member.set" [member]="member" [formConcepts]="form.setMembers"></app-conditional-concept>
+        <app-concept-set *ngIf="member.set && !isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-concept-set>
+        <app-tabular-view *ngIf="member.set && isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-tabular-view>
+      </div>
     </div>
   </div>
   <div  *ngIf="!isFormSelected">

@@ -8,6 +8,10 @@ import { ConceptComponent } from '../concept/concept.component';
 import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
 import { TextBoxComponent } from '../elements/text-box/text-box.component';
 import { CheckBoxComponent } from '../elements/check-box/check-box.component';
+import { FormComponent } from '../form/form.component';
+import { CodeSheetComponent } from '../code-sheet/code-sheet.component';
+import { CodeConceptComponent } from '../code-sheet/code-concept/code-concept.component';
+import { CodeConceptSetComponent } from '../code-sheet/code-concept-set/code-concept-set.component';
 
 describe('FormElementsComponent', () => {
   let component: FormElementsComponent;
@@ -16,7 +20,8 @@ describe('FormElementsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FormElementsComponent, TabularViewComponent, ConceptSetComponent, ConditionalConceptComponent,
-      ConceptComponent, ConceptConditionComponent, TextBoxComponent, CheckBoxComponent]
+      ConceptComponent, ConceptConditionComponent, TextBoxComponent, CheckBoxComponent, FormComponent,
+        CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent]
     })
     .compileComponents();
   }));
@@ -25,6 +30,7 @@ describe('FormElementsComponent', () => {
     fixture = TestBed.createComponent(FormElementsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    FormComponent.formConditionsConcepts = new Set<String>();
   });
 
   it('should create', () => {
@@ -118,5 +124,27 @@ describe('FormElementsComponent', () => {
     expect(component.concept.name).toBe('conceptA');
     expect(component.concept.fullySpecifiedName).toBe('conceptA');
     expect(component.concept.set).toBe(false);
+  });
+
+  it('should add conceptName to formConditionConcepts when concept is found', function () {
+    component.formConcepts = [{
+      name: 'conceptA',
+      set: false,
+      fullySpecifiedName: 'conceptA'
+    }];
+    component.conceptName = 'conceptA';
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(FormComponent.formConditionsConcepts.has('conceptA')).toBeTruthy();
+  });
+
+  it('should not add conceptName to formConditionConcepts when concept is not found', function () {
+    component.formConcepts = [];
+    component.conceptName = 'conceptA';
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(FormComponent.formConditionsConcepts.has('conceptA')).toBeFalsy();
   });
 });

@@ -10,6 +10,7 @@ import { ConceptUtils } from '../utils/concept.utils';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
+  static formConditionsConcepts: Set<String>;
   name: String;
   form: any;
   isFormSelected: Boolean;
@@ -24,6 +25,7 @@ export class FormComponent {
   }
 
   private initializeForm() {
+    FormComponent.formConditionsConcepts = new Set<String>();
     this.conceptService.getAppConfig().subscribe((config: { config: any }) => {
       this.conceptService.getFormDetails(this.name).subscribe((formDetails: { results: any }) => {
         this.form = FormConfigBuilder.build(formDetails.results[0], config.config.conceptSetUI);
@@ -48,5 +50,9 @@ export class FormComponent {
     if (formElement) {
       formElement.scrollTop = 0;
     }
+  }
+
+  isInFormConditions(member) {
+    return FormComponent.formConditionsConcepts.has(member.fullySpecifiedName);
   }
 }

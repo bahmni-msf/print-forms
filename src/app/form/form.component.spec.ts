@@ -16,6 +16,7 @@ import { CodeConceptComponent } from '../code-sheet/code-concept/code-concept.co
 import { CodeConceptSetComponent } from '../code-sheet/code-concept-set/code-concept-set.component';
 import { ConditionalConceptComponent } from '../conditional-concept/conditional-concept.component';
 import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
+import { FormElementsComponent } from '../form-elements/form-elements.component';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -28,7 +29,8 @@ describe('FormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FormComponent, ConceptSetComponent, ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent,
-        TextBoxComponent, TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent],
+        TextBoxComponent, TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent,
+        FormElementsComponent],
       providers: [{provide: ActivatedRoute, useValue: {params: from([{formName: 'test form'}])}},
         {provide: ConceptsService, useValue: conceptServiceMock}]
     })
@@ -188,7 +190,6 @@ describe('FormComponent', () => {
     expect(component.isFormSelected).toBeTruthy();
     component.setIsFormSelected(false);
     expect(component.isFormSelected).toBeFalsy();
-
   });
 
 });

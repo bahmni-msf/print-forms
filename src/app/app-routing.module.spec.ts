@@ -21,6 +21,7 @@ import { CodeConceptComponent } from './code-sheet/code-concept/code-concept.com
 import { CodeConceptSetComponent } from './code-sheet/code-concept-set/code-concept-set.component';
 import { ConditionalConceptComponent } from './conditional-concept/conditional-concept.component';
 import { ConceptConditionComponent } from './concept-condition/concept-condition.component';
+import { FormElementsComponent } from './form-elements/form-elements.component';
 
 describe('AppRoutingModule', () => {
   let location: Location;
@@ -37,7 +38,7 @@ describe('AppRoutingModule', () => {
       declarations: [
         AppComponent, FormComponent, HeaderComponent, FormListComponent, ErrorMessageComponent, FilterPipe,
         ConditionalConceptComponent, ConceptComponent, ConceptConditionComponent, ConceptSetComponent, TextBoxComponent,
-        TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent,
+        TabularViewComponent, CheckBoxComponent, CodeSheetComponent, CodeConceptComponent, CodeConceptSetComponent, FormElementsComponent
       ]
     });
 

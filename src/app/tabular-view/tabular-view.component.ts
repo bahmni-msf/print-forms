@@ -9,6 +9,7 @@ import { ConceptUtils } from '../utils/concept.utils';
 export class TabularViewComponent {
 
   @Input() member: any;
+  @Input() formConcepts: any;
   constructor() {}
 
   isTabular(member) {

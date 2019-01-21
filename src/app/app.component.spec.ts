@@ -20,6 +20,7 @@ import { CodeConceptComponent } from './code-sheet/code-concept/code-concept.com
 import { CodeConceptSetComponent } from './code-sheet/code-concept-set/code-concept-set.component';
 import { ConditionalConceptComponent } from './conditional-concept/conditional-concept.component';
 import { ConceptConditionComponent } from './concept-condition/concept-condition.component';
+import { FormElementsComponent } from './form-elements/form-elements.component';
 
 describe('AppComponent', () => {
   const UserServiceMock: UserService = mock(UserService);
@@ -49,7 +50,8 @@ describe('AppComponent', () => {
         CodeSheetComponent,
         CodeConceptComponent,
         CodeConceptSetComponent,
-        FilterPipe
+        FilterPipe,
+        FormElementsComponent
       ],
       providers: [{provide: UserService, useValue: userServiceMock}]
     }).compileComponents();

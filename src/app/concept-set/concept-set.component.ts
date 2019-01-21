@@ -9,6 +9,7 @@ import { ConceptUtils } from '../utils/concept.utils';
 export class ConceptSetComponent implements OnInit {
 
   @Input() member: any;
+  @Input() formConcepts: any;
   abnormal: boolean;
 
   constructor() { }

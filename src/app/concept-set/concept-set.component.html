@@ -1,14 +1,20 @@
-<div class="concept-set-section" *ngIf="!abnormal">
-  <div class="concept-set">
-    {{member.name}}
-    <button class="add-more" *ngIf="member.config && member.config.allowAddMore" disabled>[+]</button>
+<div *ngIf="!isInFormConditions()">
+  <div class="concept-set-section" *ngIf="!abnormal">
+    <div class="concept-set">
+      {{member.name}}
+      <button class="add-more" *ngIf="member.config && member.config.allowAddMore" disabled>[+]</button>
+    </div>
+    <div *ngFor="let setMember of member.setMembers">
+      <app-conditional-concept *ngIf="!setMember.set" [member]="setMember"
+                               [formConcepts]="member.setMembers"></app-conditional-concept>
+      <app-tabular-view *ngIf="setMember.set && isTabular(setMember)" [member]="setMember"
+                        [formConcepts]="member.setMembers"></app-tabular-view>
+      <app-concept-set *ngIf="setMember.set && !isTabular(setMember)" [member]="setMember"
+                       [formConcepts]="member.setMembers"></app-concept-set>
+    </div>
   </div>
-  <div *ngFor="let setMember of member.setMembers">
-      <app-conditional-concept *ngIf="!setMember.set" [member]="setMember" [formConcepts]="member.setMembers"></app-conditional-concept>
-      <app-tabular-view *ngIf="setMember.set && isTabular(setMember)" [member]="setMember" [formConcepts]="member.setMembers"></app-tabular-view>
-      <app-concept-set *ngIf="setMember.set && !isTabular(setMember)" [member]="setMember" [formConcepts]="member.setMembers"></app-concept-set>
+  <div *ngIf="abnormal">
+    <app-conditional-concept [member]="getMergedAbnormalConcept()"
+                             [formConcepts]="formConcepts"></app-conditional-concept>
   </div>
-</div>
-<div *ngIf="abnormal">
-  <app-conditional-concept [member]="getMergedAbnormalConcept()" [formConcepts]="formConcepts"></app-conditional-concept>
 </div>

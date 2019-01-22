@@ -12,6 +12,7 @@ import { FormComponent } from '../form/form.component';
 import { CodeSheetComponent } from '../code-sheet/code-sheet.component';
 import { CodeConceptComponent } from '../code-sheet/code-concept/code-concept.component';
 import { CodeConceptSetComponent } from '../code-sheet/code-concept-set/code-concept-set.component';
+import { ConceptUtils } from '../utils/concept.utils';
 
 describe('FormElementsComponent', () => {
   let component: FormElementsComponent;
@@ -29,11 +30,11 @@ describe('FormElementsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormElementsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     FormComponent.formConditionsConcepts = new Set<String>();
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
@@ -146,5 +147,41 @@ describe('FormElementsComponent', () => {
     fixture.detectChanges();
 
     expect(FormComponent.formConditionsConcepts.has('conceptA')).toBeFalsy();
+  });
+
+  it('should add concept to form conditions map when concept is present', function () {
+    component.concept = { fullySpecifiedName : 'name'};
+
+    component.addToFormConditionConcepts();
+
+    expect(ConceptUtils.isInFormConditions('name')).toBeTruthy();
+  });
+
+  it('should remove from form conditions map on init', function () {
+    component.conceptName = 'conceptA';
+    component.formConcepts = [
+      {
+        fullySpecifiedName: 'conceptA'
+      }
+    ];
+
+    component.ngOnInit();
+
+    expect(ConceptUtils.isInFormConditions('conceptA')).toBeFalsy();
+  });
+
+  it('should not remove from form conditions map on init when the concept is not in form conditions map', function () {
+    FormComponent.formConditionsConcepts = new Set<String>();
+    FormComponent.formConditionsConcepts.add('conceptA');
+    component.conceptName = 'conceptB';
+    component.formConcepts = [
+      {
+        fullySpecifiedName: 'conceptB'
+      }
+    ];
+
+    component.ngOnInit();
+
+    expect(FormComponent.formConditionsConcepts.size).toBe(1);
   });
 });

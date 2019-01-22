@@ -1,4 +1,5 @@
 import { ConceptUtils } from './concept.utils';
+import { FormComponent } from '../form/form.component';
 
 describe('Concept Utils', () => {
 
@@ -48,5 +49,18 @@ describe('Concept Utils', () => {
     const member = {name: 'test member', set: true, setMembers: []};
 
     expect(ConceptUtils.isAbnormal(member)).toBeFalsy();
+  });
+
+  it('should return true if concept name is in form conditions map', function () {
+    FormComponent.formConditionsConcepts = new Set<String>();
+    FormComponent.formConditionsConcepts.add('concept Name');
+
+    expect(ConceptUtils.isInFormConditions('concept Name')).toBeTruthy();
+  });
+
+  it('should return false if concept name is not in form conditions map', function () {
+    FormComponent.formConditionsConcepts = new Set<String>();
+
+    expect(ConceptUtils.isInFormConditions('concept Name')).toBeFalsy();
   });
 });

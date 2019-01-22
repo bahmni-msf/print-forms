@@ -9,6 +9,7 @@ import { ConditionalConceptComponent } from '../conditional-concept/conditional-
 import { ConceptComponent } from '../concept/concept.component';
 import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
 import { FormElementsComponent } from '../form-elements/form-elements.component';
+import { FormComponent } from '../form/form.component';
 
 describe('TabularViewComponent', () => {
   let component: TabularViewComponent;
@@ -27,11 +28,10 @@ describe('TabularViewComponent', () => {
     fixture = TestBed.createComponent(TabularViewComponent);
     component = fixture.componentInstance;
     component.member = {setMembers: []};
-    fixture.detectChanges();
   });
 
   it('should create Tabular view component', () => {
-
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
@@ -62,7 +62,7 @@ describe('TabularViewComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelectorAll('div')[3].getAttribute('class')).toEqual('concept-name');
+    expect(compiled.querySelectorAll('div')[4].getAttribute('class')).toEqual('concept-name');
     expect(compiled.getElementsByClassName('concept-name').length).toBe(2);
   });
 
@@ -142,5 +142,26 @@ describe('TabularViewComponent', () => {
 
     expect(compiled.querySelectorAll('app-tabular-view').length).toBe(2);
     expect(compiled.querySelector('app-tabular-view')).not.toBeNull();
+  });
+
+  it('should not create any element when the member is already rendered', function () {
+    FormComponent.formConditionsConcepts = new Set<String>();
+    FormComponent.formConditionsConcepts.add('member1');
+    FormComponent.formConditionsConcepts.add('member2');
+    FormComponent.formConditionsConcepts.add('test member');
+    component.member = {
+      name: 'test member', setMembers: [
+        {
+          name: 'member1', set: true, setMembers: [
+            {name: 'member1', set: false},
+            {name: 'member2', set: false}]
+        }
+      ], fullySpecifiedName: 'test member'
+    };
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelectorAll('div').length).toBe(0);
+    expect(compiled.querySelectorAll('app-tabular-view').length).toBe(0);
   });
 });

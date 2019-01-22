@@ -15,4 +15,8 @@ export class TabularViewComponent {
   isTabular(member) {
     return  ConceptUtils.isTabular(member);
   }
+
+  isInFormConditions() {
+    return ConceptUtils.isInFormConditions(this.member.fullySpecifiedName);
+  }
 }

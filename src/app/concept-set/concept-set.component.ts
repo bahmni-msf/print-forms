@@ -24,4 +24,8 @@ export class ConceptSetComponent implements OnInit {
   getMergedAbnormalConcept() {
     return ConceptUtils.getMergedAbnormalConcept(this.member);
   }
+
+  isInFormConditions() {
+    return ConceptUtils.isInFormConditions(this.member.fullySpecifiedName);
+  }
 }

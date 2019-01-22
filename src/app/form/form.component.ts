@@ -51,8 +51,4 @@ export class FormComponent {
       formElement.scrollTop = 0;
     }
   }
-
-  isInFormConditions(member) {
-    return FormComponent.formConditionsConcepts.has(member.fullySpecifiedName);
-  }
 }

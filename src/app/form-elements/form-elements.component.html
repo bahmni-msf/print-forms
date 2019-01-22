@@ -7,5 +7,6 @@
                      [formConcepts]="formConcepts"></app-concept-set>
     <app-tabular-view *ngIf="concept.set && isTabular(concept)" [member]="concept"
                       [formConcepts]="formConcepts"></app-tabular-view>
+    {{addToFormConditionConcepts()}}
   </div>
 </div>

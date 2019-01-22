@@ -1,3 +1,5 @@
+import { FormComponent } from '../form/form.component';
+
 export class ConceptUtils {
 
   public static isTabular(concept) {
@@ -26,5 +28,9 @@ export class ConceptUtils {
       }
     }
     return false;
+  }
+
+  public static isInFormConditions(fullySpecifiedName) {
+    return FormComponent.formConditionsConcepts.has(fullySpecifiedName);
   }
 }

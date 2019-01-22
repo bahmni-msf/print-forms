@@ -9,6 +9,7 @@ import { CheckBoxComponent } from '../elements/check-box/check-box.component';
 import { ConditionalConceptComponent } from '../conditional-concept/conditional-concept.component';
 import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
 import { FormElementsComponent } from '../form-elements/form-elements.component';
+import { FormComponent } from '../form/form.component';
 
 describe('ConceptSetComponent', () => {
   let component: ConceptSetComponent;
@@ -27,19 +28,21 @@ describe('ConceptSetComponent', () => {
     fixture = TestBed.createComponent(ConceptSetComponent);
     component = fixture.componentInstance;
     component.member = {name: 'test member', set: true, setMembers: []};
-    fixture.detectChanges();
   });
 
   it('should create concept-set component', () => {
+    fixture.detectChanges();
+
     expect(component).toBeTruthy();
   });
 
   it('should display div elements with classes concept-set and concept-set-section', () => {
     const compiled = fixture.debugElement.nativeElement;
+    fixture.detectChanges();
 
-    expect(compiled.querySelectorAll('div')[0].getAttribute('class')).toEqual('concept-set-section');
-    expect(compiled.querySelectorAll('div')[1].getAttribute('class')).toEqual('concept-set');
-    expect(compiled.querySelectorAll('div')[1].innerText).toEqual('test member');
+    expect(compiled.querySelectorAll('div')[1].getAttribute('class')).toEqual('concept-set-section');
+    expect(compiled.querySelectorAll('div')[2].getAttribute('class')).toEqual('concept-set');
+    expect(compiled.querySelectorAll('div')[2].innerText).toEqual('test member');
   });
 
   it('should display concept and concept-set component when set members list is not empty', function () {
@@ -75,7 +78,7 @@ describe('ConceptSetComponent', () => {
   });
 
   it('should not display concept and concept-set components when set-members list is empty', function () {
-    component.member = {name: 'test member'};
+    component.member = {name: 'test member', setMembers: []};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
@@ -85,6 +88,7 @@ describe('ConceptSetComponent', () => {
 
   it('should call isAbnormal in ConceptUtils on ngOnInt call', function () {
     conceptUtils = spyOn(ConceptUtils, 'isAbnormal');
+    fixture.detectChanges();
 
     component.ngOnInit();
 
@@ -93,6 +97,7 @@ describe('ConceptSetComponent', () => {
 
   it('should call getMergedAbnormalConcept in ConceptUtils when isAbnormal is undefined', function () {
     conceptUtils = spyOn(ConceptUtils, 'getMergedAbnormalConcept');
+    fixture.detectChanges();
 
     const mergedConcept = component.getMergedAbnormalConcept();
 
@@ -177,17 +182,35 @@ describe('ConceptSetComponent', () => {
   });
 
   it('should have + button when config allowAddMore  is true', function () {
-    component.member = { name : 'test member', datatype: 'Text', config: {allowAddMore: true}};
+    component.member = { name: 'test member', datatype: 'Text', config: {allowAddMore: true}, setMembers: []};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.getElementsByClassName('add-more').length).toBe(1);
   });
 
   it('should not have + button when config allowAddMore  is not true', function () {
-    component.member = { name : 'test member', datatype: 'Text'};
+    component.member = { name : 'test member', datatype: 'Text', setMembers: []};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.getElementsByClassName('add-more').length).toBe(0);
+  });
+
+  it('should not create any elements if the concept set is rendered', function () {
+    FormComponent.formConditionsConcepts = new Set<String>();
+    FormComponent.formConditionsConcepts.add('conceptA');
+    component.member = {
+      name: 'test',
+      set: true,
+      rendered: true,
+      setMembers: [{
+        name: 'conceptA',
+        set: false
+      },
+      ]
+    };
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.getElementsByClassName('div').length).toBe(0);
   });
 });
 

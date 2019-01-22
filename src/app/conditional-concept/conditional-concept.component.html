@@ -1,3 +1,5 @@
-<app-concept [member]="member"></app-concept>
-<app-concept-condition *ngIf="conceptConditions" [conceptConditions] = "conceptConditions"
-                       [formConcepts]="formConcepts"></app-concept-condition>
+<div *ngIf="!isInFormConditions()">
+  <app-concept [member]="member"></app-concept>
+  <app-concept-condition *ngIf="conceptConditions" [conceptConditions]="conceptConditions"
+                         [formConcepts]="formConcepts"></app-concept-condition>
+</div>

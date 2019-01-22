@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ConceptUtils } from '../utils/concept.utils';
 import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-form-elements',
   templateUrl: './form-elements.component.html',
-  styleUrls: ['./form-elements.component.scss']
+  styleUrls: ['./form-elements.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormElementsComponent implements OnInit {
 
@@ -18,7 +19,7 @@ export class FormElementsComponent implements OnInit {
   ngOnInit() {
     this.getConcept(this.conceptName);
     if (this.concept) {
-      this.addToFormConditionConcepts();
+      this.removeFromFormConditionConcepts();
     }
   }
 
@@ -31,10 +32,14 @@ export class FormElementsComponent implements OnInit {
   }
 
   addToFormConditionConcepts() {
-    FormComponent.formConditionsConcepts.add(this.conceptName);
+    FormComponent.formConditionsConcepts.add(this.concept.fullySpecifiedName);
   }
 
   isTabular(member) {
     return ConceptUtils.isTabular(member);
+  }
+
+  private removeFromFormConditionConcepts() {
+    FormComponent.formConditionsConcepts.delete(this.concept.fullySpecifiedName);
   }
 }

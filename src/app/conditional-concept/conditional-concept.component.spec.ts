@@ -9,6 +9,7 @@ import { formConditions } from '../form-list/form-list.component';
 import { FormElementsComponent } from '../form-elements/form-elements.component';
 import { TabularViewComponent } from '../tabular-view/tabular-view.component';
 import { ConceptSetComponent } from '../concept-set/concept-set.component';
+import { FormComponent } from '../form/form.component';
 
 describe('ConditionalConceptComponent', () => {
   let component: ConditionalConceptComponent;
@@ -24,18 +25,19 @@ describe('ConditionalConceptComponent', () => {
   }));
 
   beforeEach(() => {
+    FormComponent.formConditionsConcepts = new Set<String>();
     fixture = TestBed.createComponent(ConditionalConceptComponent);
     component = fixture.componentInstance;
     component.member = {name: 'member'};
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it('should create concept component and concept condition when concept conditions exist', function () {
-    component.member = {name: 'member', set: false};
+    component.member = {name: 'member', set: false, fullySpecifiedName: 'member'};
     component.conceptConditions = [];
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
@@ -52,5 +54,17 @@ describe('ConditionalConceptComponent', () => {
 
     expect(compiled.querySelectorAll('app-concept-condition').length).toBe(0);
     expect(compiled.querySelectorAll('app-concept').length).toBe(1);
+  });
+
+  it('should not create concept and concept condition when concept is rendered', function () {
+    FormComponent.formConditionsConcepts = new Set<String>();
+    FormComponent.formConditionsConcepts.add('member');
+    component.member = {name: 'member', set: false, fullySpecifiedName: 'member'};
+    component.conceptConditions = undefined;
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelectorAll('app-concept').length).toBe(0);
+    expect(compiled.querySelectorAll('app-concept-condition').length).toBe(0);
   });
 });

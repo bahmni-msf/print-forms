@@ -1,4 +1,4 @@
-.Text, .Numeric, .Date{
+.Text, .Numeric, .Date, .Datetime{
   color: #363463;
   padding: 5px 10px;
   margin: 15px 0 0;
@@ -19,19 +19,16 @@ button{
 .hint {
   font-size: 11px;
   display: inline-block;
-  float: left;
   padding: 5px 10px 0;
-  width: 130px;
   margin: 15px 0 0;
 }
 textarea{
-  height: 35px;
   width: 100%;
   transition: height .1s ease;
   box-sizing: border-box;
   color: #363463;
   padding: 0 10px;
-  margin: 15px 0 0;
+  margin: 8px 0 0;
   background-color: #FFF;
   border: 1px solid black;
   resize: none;

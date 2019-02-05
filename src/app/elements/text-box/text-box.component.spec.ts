@@ -24,19 +24,19 @@ describe('TextBoxComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have label & input elements when datatype is not Text', () => {
+  it('should have div & input elements when datatype is not Text', () => {
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelector('label').getAttribute('class')).toEqual('text-answer');
+    expect(compiled.querySelector('div').getAttribute('class')).toEqual('text-answer');
     expect(compiled.querySelector('input')).not.toBeNull();
   });
 
-  it('should have label & input elements when there is conciseText true config', () => {
+  it('should have div & input elements when there is conciseText true config', () => {
     component.member = { datatype: 'Text', config: { conciseText: true}};
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelector('label').getAttribute('class')).toEqual('text-answer');
+    expect(compiled.querySelector('div').getAttribute('class')).toEqual('text-answer');
     expect(compiled.querySelector('input')).not.toBeNull();
     expect(compiled.querySelector('input').getAttribute('class')).toEqual('Text');
   });
@@ -46,7 +46,7 @@ describe('TextBoxComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelector('label').getAttribute('class')).toEqual('text-answer');
+    expect(compiled.querySelector('div').getAttribute('class')).toEqual('text-answer');
     expect(compiled.querySelector('textarea')).not.toBeNull();
   });
 
@@ -55,7 +55,7 @@ describe('TextBoxComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelector('label').getAttribute('class')).toEqual('text-answer');
+    expect(compiled.querySelector('div').getAttribute('class')).toEqual('text-answer');
     expect(compiled.querySelector('textarea')).not.toBeNull();
   });
 
@@ -66,7 +66,7 @@ describe('TextBoxComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
 
     expect(compiled.querySelector('button')).not.toBeNull();
-    expect(compiled.querySelector('div').getAttribute('class')).toEqual('abnormal');
+    expect(compiled.querySelectorAll('div')[1].getAttribute('class')).toEqual('abnormal');
   });
 
   it('should not have button when member is not abnormal', function () {

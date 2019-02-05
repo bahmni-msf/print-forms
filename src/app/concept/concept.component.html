@@ -9,6 +9,7 @@
     <app-text-box *ngSwitchCase="'Text'" [member]="member"></app-text-box>
     <app-text-box *ngSwitchCase="'Numeric'" [member]="member"></app-text-box>
     <app-text-box *ngSwitchCase="'Date'" [member]="member"></app-text-box>
+    <app-text-box *ngSwitchCase="'Datetime'" [member]="member"></app-text-box>
     <app-text-box *ngSwitchCase="'Coded'" [member]="member"></app-text-box>
     <app-check-box *ngSwitchCase="'Boolean'"></app-check-box>
     <button class="add-more" *ngIf="member.config && member.config.allowAddMore" disabled>[+]</button>

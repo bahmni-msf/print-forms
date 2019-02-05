@@ -1,12 +1,12 @@
-<label class="text-answer" *ngIf="member.datatype === 'Text'">
-  <textarea *ngIf="!member.config" disabled ></textarea>
-  <textarea *ngIf="member.config && !member.config.conciseText" disabled ></textarea>
+<div class="text-answer" *ngIf="member.datatype === 'Text'">
+  <textarea rows="5" *ngIf="!member.config" disabled ></textarea>
+  <textarea rows="5" *ngIf="member.config && !member.config.conciseText" disabled ></textarea>
   <input *ngIf="member.config && member.config.conciseText" class = {{member.datatype}} disabled >
-</label>
-<label class="text-answer" *ngIf="member.datatype !== 'Text'">
+</div>
+<div class="text-answer" *ngIf="member.datatype !== 'Text'">
   <input class = {{member.datatype}} disabled >
-</label>
-<p *ngIf="member.datatype === 'Coded'" class="hint">&nbsp;(Refer to Code Sheet)</p>
+</div>
+<p *ngIf="member.datatype === 'Coded'" class="hint">&nbsp;(Refer to Code Sheet) &nbsp;<strong *ngIf="member.config && member.config.multiSelect">(Choose Multiple)</strong></p>
  <div class="abnormal" *ngIf="member.isAbnormal">
    <p class="hint" *ngIf="member.range[0] && member.range[1]">({{member.range[0]}}-{{member.range[1]}})</p>
    <p class="hint" *ngIf="member.range[0] && !member.range[1]">(> {{member.range[0]}})</p>

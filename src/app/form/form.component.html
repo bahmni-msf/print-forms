@@ -1,18 +1,36 @@
 <div *ngIf="form" class="form" id="printable">
-  <div class="formName">{{name}}</div>
-  <div class="tab-group" id="non-printable">
-    <button type="button" class="btn" [class.active]="isFormSelected" (click)="setIsFormSelected(true)">Form</button>
-    <button type="button" class="btn" [class.active]="!isFormSelected" (click)="setIsFormSelected(false)">Code Sheet</button>
-    <button type="button" class="print-button"  (click)="printForm()"><i class="fa fa-print" aria-hidden="true"></i></button>
-  </div>
-  <div *ngIf="isFormSelected">
-    <div *ngFor="let member of form.setMembers">
-        <app-conditional-concept *ngIf="!member.set" [member]="member" [formConcepts]="form.setMembers"></app-conditional-concept>
-        <app-concept-set *ngIf="member.set && !isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-concept-set>
-        <app-tabular-view *ngIf="member.set && isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-tabular-view>
-    </div>
-  </div>
-  <div  *ngIf="!isFormSelected">
-    <app-code-sheet [form]="form"></app-code-sheet>
+  <table class="print-table">
+    <thead class="header">
+      <tr>
+        <th>
+          <div class="formName">{{name}}</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="tab-group" id="non-printable">
+            <button type="button" class="btn" [class.active]="isFormSelected" (click)="setIsFormSelected(true)">Form</button>
+            <button type="button" class="btn" [class.active]="!isFormSelected" (click)="setIsFormSelected(false)">Code Sheet</button>
+            <button type="button" class="print-button" (click)="printForm()"><i class="fa fa-print" aria-hidden="true"></i></button>
+          </div>
+          <div *ngIf="isFormSelected">
+            <div *ngFor="let member of form.setMembers">
+              <app-conditional-concept *ngIf="!member.set" [member]="member" [formConcepts]="form.setMembers"></app-conditional-concept>
+              <app-concept-set *ngIf="member.set && !isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-concept-set>
+              <app-tabular-view *ngIf="member.set && isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-tabular-view>
+            </div>
+          </div>
+          <div *ngIf="!isFormSelected">
+            <app-code-sheet [form]="form"></app-code-sheet>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-header"><span *ngIf="!isFormSelected">Code Sheet: </span>{{name}}</div>
+  <div id="print-patinet-id" *ngIf="isFormSelected">
+    <small>Patient ID: _________________________</small>
   </div>
 </div>

@@ -5,8 +5,8 @@
       <input [(ngModel)]="searchKeyWord" class="search_input" placeholder="Search..."/>
     </div>
     <ul>
-      <li *ngFor="let formName of formNames | filter: searchKeyWord">
-        <a class="conceptName" routerLink="{{formName}}">{{ formName }}</a>
+      <li *ngFor="let formName of formNames | filter: searchKeyWord" >
+        <a class="conceptName" routerLink="{{formName}}" routerLinkActive="active-form-link">{{ formName }}</a>
       </li>
     </ul>
   </div>

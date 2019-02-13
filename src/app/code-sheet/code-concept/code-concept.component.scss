@@ -3,17 +3,15 @@
   border: 1px solid #000;
   margin: 0 1% 0 1%;
   width: 100%;
-  border-top: none;
-}
-
-.code-sheet-answer{
-  width: 100%;
-}
-
-.answer-row{
-  display: flex;
-}
-.answer-column{
-  flex: 1;
-  margin-right: 1%;
+  border-top: none;  
+  .code-sheet-answer {
+    width: 100%;    
+    .answer-row {
+      display: flex;
+    }
+    .answer-column {
+      flex: 1;
+      margin-right: 1%;
+    }
+  }
 }

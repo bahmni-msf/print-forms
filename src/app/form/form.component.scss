@@ -10,67 +10,58 @@
   background: #FFF;
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-.formName {
-  margin: 0;
-  background: #699;
-  color: white;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: 500;
-  font-family: Arial, FontAwesome, serif;
-}
-
-.btn {
-  border: none;
-  outline: none;
-  padding: 10px 16px;
-  font-size: 18px;
-  background: #ccc;
-  margin: 0 5px 2px 0;
-  cursor: pointer;
-  border-radius: 3px;
-
-  &:hover{
-    background: #94B7B1;
+  .print-table {
+    width: 100%;
+    .header {
+      .formName {
+        margin: 0;
+        background: #699;
+        color: white;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 20px;
+        font-weight: 500;
+        font-family: Arial, FontAwesome, serif;
+      }
+    }
+    .tab-group{
+      margin-top: 5px;
+      width: 100%;
+      .btn {
+        border: none;
+        outline: none;
+        padding: 10px 16px;
+        font-size: 18px;
+        background: #ccc;
+        margin: 0 5px 2px 0;
+        cursor: pointer;
+        border-radius: 3px;
+        &:hover{
+          background: #94B7B1;
+        }
+        &:focus{
+          outline: 0;
+          box-shadow: none;
+        }
+      }
+      .print-button{
+        font-size: xx-large;
+        cursor: pointer;
+        float: right;
+        border: 2px solid black;
+        margin: 0 10px 2px 0;
+        border-radius: 3px;
+      }
+      .active{
+        color: #fff;
+        background: #699;
+      }
+    }
   }
-
-  &:focus{
-    outline: 0;
-    box-shadow: none;
+  #print-patinet-id{
+    visibility: hidden;
   }
-
-}
-
-.print-button{
-  font-size: xx-large;
-  cursor: pointer;
-  float: right;
-  border: 2px solid black;
-  margin: 0 10px 2px 0;
-  border-radius: 3px;
-}
-
-.active{
-  color: #fff;
-  background: #699;
-}
-
-.tab-group{
-  margin-top: 5px;
-  width: 100%
-}
-
-.print-table{
-  width: 100%;
-}
-
-#print-patinet-id{
-  visibility: hidden;
-}
-
-.form-header {
-  visibility: hidden;
+  .form-header {
+    visibility: hidden;
+  }
 }

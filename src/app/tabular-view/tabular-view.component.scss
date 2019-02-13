@@ -1,39 +1,32 @@
 .tabular-concept {
   text-align: left;
-  font-family: OpenSans, Arial, sans-serif, Arial, sans-serif;
-  padding: 0 0 5px;
+  padding: 10px 0 10px 10px;    
+  strong {
+    font-weight: bold;
+    font-size: 12px;
+  }  
+  .container {
+    display: flex;
+    margin: 10px 0;
+    .container-element {
+      border: 1px solid #000;
+      flex: 1;
+      break-inside: avoid;
+      .concept-name {
+        font-size: 11px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        padding: 7px;
+        font-weight: 700;
+        width: auto;
+        word-break: normal;
+        text-align: left;
+        border-bottom: 1px solid #000;
+        vertical-align: inherit;
+        display: flex;
+        flex: 1;
+        page-break-inside: avoid;
+      }
+    }
+  }
 }
-
-.container-element {
-  border: 1px solid #000;
-  flex: 1;
-  padding-bottom: 2%;
-}
-
-.container {
-  display: flex;
-  margin: 10px 10px 10px 10px;
-}
-
-strong {
-  font-weight: bold;
-  font-size: 12px;
-  padding: 10px;
-}
-
-.concept-name{
-  font-size: 11px;
-  border-collapse: collapse;
-  border-spacing: 0;
-  padding: 7px;
-  font-weight: 700;
-  width: auto;
-  word-break: normal;
-  text-align: left;
-  border-bottom: 1px solid #000;
-  vertical-align: inherit;
-  display: flex;
-  flex: 1;
-  page-break-inside: avoid;
-}
-

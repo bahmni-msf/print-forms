@@ -26,7 +26,7 @@ describe('CheckBoxComponent', () => {
   it('should display basic check box elements', function () {
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelector('div').getAttribute('class')).toEqual('Boolean');
+    expect(compiled.querySelector('div').getAttribute('class')).toEqual('checkbox-container');
     expect(compiled.querySelectorAll('button').length).toEqual(2);
     expect(compiled.querySelectorAll('p').length).toEqual(2);
     expect(compiled.querySelectorAll('p')[0].textContent).toEqual('Yes');

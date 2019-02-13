@@ -1,16 +1,15 @@
-.checkbox{
-  height: 15px;
-  width: 15px;
-  border: 1px solid black;
-  margin: 1.5% 1.5% 1.5% 0;
-  display: inline-block;
-}
-.Boolean{
+.checkbox-container {
   padding-top: 1%;
-}
-p{
-  font-family: OpenSans,Arial,sans-serif,Arial,sans-serif;
-  font-size: 12px;
-  padding-right: 5%;
-  display: inline-block;
+  .checkbox{
+    height: 15px;
+    width: 15px;
+    border: 1px solid black;
+    margin: 1.5% 1.5% 1.5% 0;
+    display: inline-block;
+  }
+  p{
+    font-size: 12px;
+    padding-right: 5%;
+    display: inline-block;
+  }
 }

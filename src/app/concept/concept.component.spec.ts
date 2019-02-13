@@ -29,7 +29,7 @@ describe('ConceptComponent', () => {
   it('should have default concept div elements', () => {
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelector('div').getAttribute('class')).toEqual('concept');
+    expect(compiled.querySelectorAll('div')[0].getAttribute('class')).toEqual('concept-table');
     expect(compiled.querySelectorAll('div')[1].getAttribute('class')).toEqual('question');
     expect(compiled.querySelectorAll('div')[2].getAttribute('class')).toEqual('answer');
   });
@@ -103,7 +103,7 @@ describe('ConceptComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.getElementsByClassName('concept')[0].querySelector('p').textContent).toContain('(mm)');
+    expect(compiled.getElementsByClassName('question')[0].querySelector('p').textContent).toContain('(mm)');
   });
 
   it('should not add units to label when units config is null', function () {
@@ -111,7 +111,7 @@ describe('ConceptComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.getElementsByClassName('concept')[0].querySelector('p').textContent).toBe('test member');
+    expect(compiled.getElementsByClassName('question')[0].querySelector('p').textContent).toBe('test member');
   });
 
   it('should add DD/MM/YYYY to label when dataType is date ', function () {

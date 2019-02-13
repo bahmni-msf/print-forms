@@ -1,8 +1,7 @@
 <div *ngIf="!isInFormConditions()">
   <div class="concept-set-section" *ngIf="!abnormal">
     <div class="concept-set">
-      {{member.name}}
-      <button class="add-more" *ngIf="member.config && member.config.allowAddMore" disabled>[+]</button>
+      <p> {{member.name}} <span class="add-more" *ngIf="member.config && member.config.allowAddMore">[+]</span> </p>
     </div>
     <div *ngFor="let setMember of member.setMembers">
       <app-conditional-concept *ngIf="!setMember.set" [member]="setMember"

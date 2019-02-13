@@ -1,20 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  font-family: OpenSans, Arial, sans-serif, Arial, sans-serif;
+  font-family: OpenSans, Arial, sans-serif;
 }
 
 
 @media print {
-  body, #non-printable, thead.header{
+  body, #non-printable, thead.header {
     visibility: hidden;
   }
-  .code-sheet-name{
+
+  .code-sheet-name {
     display: none;
   }
+
   #printable {
     visibility: visible;
     border-bottom: 1px solid black;
   }
+
   .form {
     position: absolute !important;
     margin: 0 auto !important;
@@ -23,22 +26,23 @@ body {
     height: auto !important;
     overflow: visible !important;
   }
+
   .formName {
     background: white !important;
     color: black !important;
     text-align: center !important;
     font-weight: bold !important;
   }
-  .section {
-    width: 85% !important;
-    padding-left: 10px;
-  }
-  .concept , .answer-column, .answer-row, .code-sheet-question, .code-sheet-concept{
+
+  .answer-column, .answer-row, .code-sheet-question, .code-sheet-concept{
     page-break-inside: avoid !important;
   }
   .concept-set-section {
     page-break-inside: auto !important;
+    margin-bottom: 20px !important;
+    margin-top: 0 !important;
   }
+
   .form-header {
     visibility: visible !important;
     position: fixed;
@@ -49,28 +53,29 @@ body {
     height: 30px;
     background: white;    
   }
-  .question p {
-    margin-bottom: 0;
-    margin-top: 6px;
-  }
+
   .tab-group {
     margin-top: -50px !important;
   }
+
   #print-patinet-id {
     visibility: visible !important;
     position: fixed;
     right: 20px;
     top: 8px;
   }
-  .tabular-concept{
+
+  .notes-table .notes-label { 
+    width: 40.5% !important;
+  }
+
+  .notes-table {
     margin-bottom: 10px;
   }
-  .concept-set{
-    margin-top: -20.8px !important;
-  }  
+  
 }
 
-.code-sheet-question{
+.code-sheet-question {
   flex: 1;
   padding-left: 5px;
   margin-right: 1%;
@@ -80,4 +85,3 @@ body {
   flex: 3;
   padding-left: 5px;
 }
-

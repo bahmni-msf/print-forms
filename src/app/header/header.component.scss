@@ -9,36 +9,33 @@
   background: #669999;
   height: 52px;
   width: 100%;
+  a.back-btn:hover, a.back-btn:active {
+    border-color: #2b95ff;
+    color: gainsboro;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a.back-btn {
+    padding: 4px 10px 5px 10px;
+    border: 1px solid #476b6b;
+    background: linear-gradient(to bottom, #669999, #527a7a);
+  }
+  a.back-btn i {
+    font-size: 30px;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+  }
+  a.back-btn, button.back-btn {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    z-index: 1;
+    margin: 3px 6px 3px 0;
+    color: #FFFFFF;
+    float: left;
+    font-size: 16px;
+    border-radius: 3px;
+  }
 }
 
-a.back-btn:hover, a.back-btn:active {
-  border-color: #2b95ff;
-  color: gainsboro;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-a.back-btn {
-  padding: 4px 10px 5px 10px;
-  border: 1px solid #476b6b;
-  background: linear-gradient(to bottom, #669999, #527a7a);
-}
-
-a.back-btn i {
-  font-size: 30px;
-  line-height: 1;
-  margin: 0;
-  padding: 0;
-}
-
-a.back-btn, button.back-btn {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
-  z-index: 1;
-  margin: 3px 6px 3px 0;
-  color: #FFFFFF;
-  float: left;
-  font-size: 16px;
-  border-radius: 3px;
-}

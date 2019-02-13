@@ -1,47 +1,51 @@
-.Text, .Numeric, .Date, .Datetime{
-  color: #363463;
-  padding: 5px 10px;
-  margin: 15px 0 0;
-  min-width: 197px;
-  float: left;
-  box-sizing: border-box;
-  border: 1px solid black;
-}
-button{
-  color: #000;
-  border: 1px solid black;
-  padding: 6px 20px 7px;
-  display: inline-block;
-  line-height: 0.5em;
-  width: 90px;
-  margin: 16px 0 0 10px;
-}
-.hint {
-  font-size: 11px;
-  display: inline-block;
-  padding: 5px 5px 0 5px;
-  margin: 15px 0 0;
-}
-textarea{
-  width: 100%;
-  transition: height .1s ease;
-  box-sizing: border-box;
-  color: #363463;
-  padding: 0 10px;
-  margin: 8px 0 0;
-  background-color: #FFF;
-  border: 1px solid black;
-  resize: none;
-}
+.row {
+  display: flex;
+  .text-answer {
+    flex-grow: 1;
+    textarea{
+      width: 98%;
+      transition: height .1s ease;
+      box-sizing: border-box;
+      color: #363463;
+      padding: 0 10px;
+      background-color: #FFF;
+      border: 1px solid black;
+      resize: none;
+    }
+    .Text, .Numeric, .Date, .Datetime{
+      color: #363463;
+      padding: 5px 10px;
+      box-sizing: border-box;
+      border: 1px solid black;
+      width: 98%;
+    }
+    .Coded {
+      border: 0;
+      outline: 0;
+      background: transparent;
+      border-bottom: 1.3px solid black;
+      position: relative;
+      width: 98%;
+      margin-top: 8px;
+    }
+  }
 
-.Coded {
-  border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 1.3px solid black;
-  position: relative;
-  top: 25px;
-  width: 40%;
-  float: left;
-}
+  .abnormal {
+    button {
+      color: #000;
+      border: 1px solid black;
+      padding: 6px 20px 7px;
+      display: inline-block;
+      line-height: 0.5em;
+      width: 90px;
+      margin: 16px 0 0 10px;
+    }
+  }
 
+  .hint {
+    flex-grow: 1;
+    font-size: 11px;
+    display: inline-block;
+    margin-left: 8px;
+  }
+}

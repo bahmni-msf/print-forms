@@ -7,18 +7,16 @@
 .code-sheet-table {
   width: 97%;
   margin: 1%;
-}
-
-.table-header {
-  width: 100%;
-  display: flex;
-  font-size: 14px;
-  border: 1px solid #000;
-  font-weight: 500;
-  margin: 1% 1% 0 1%;
-}
-
-.table-body {
-  width: 100%;
-  font-size: 12px;
+  .table-header {
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    border: 1px solid #000;
+    font-weight: 500;
+    margin: 1% 1% 0 1%;
+  }  
+  .table-body {
+    width: 100%;
+    font-size: 12px;
+  }
 }

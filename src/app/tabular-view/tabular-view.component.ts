@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConceptUtils } from '../utils/concept.utils';
 
 @Component({
   selector: 'app-tabular-view',
   templateUrl: './tabular-view.component.html',
-  styleUrls: ['./tabular-view.component.scss']
+  styleUrls: ['./tabular-view.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TabularViewComponent {
 

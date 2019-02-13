@@ -1,25 +1,23 @@
-<div class="concept">
+<div class="concept-table">
   <div class="question">
-    <p *ngIf="!member.units">{{member.name}}</p>
-    <p *ngIf="member.units">{{member.name}}&nbsp;({{member.units}})</p>
-    <p class="date-format" *ngIf="member.datatype ==='Date'">&nbsp;(DD/MM/YYYY)</p>
-    <p class="required" *ngIf="member.config && member.config.required">*</p>
-  </div>
-  <div [ngSwitch]="member.datatype" class="answer">
-    <app-text-box *ngSwitchCase="'Text'" [member]="member"></app-text-box>
-    <app-text-box *ngSwitchCase="'Numeric'" [member]="member"></app-text-box>
-    <app-text-box *ngSwitchCase="'Date'" [member]="member"></app-text-box>
-    <app-text-box *ngSwitchCase="'Datetime'" [member]="member"></app-text-box>
-    <app-text-box *ngSwitchCase="'Coded'" [member]="member"></app-text-box>
-    <app-check-box *ngSwitchCase="'Boolean'"></app-check-box>
-    <button class="add-more" *ngIf="member.config && member.config.allowAddMore" disabled>[+]</button>
-  </div>
-</div>
-<div class="concept" *ngIf="(member.config && !member.config.disableAddNotes)||!member.config">
-  <div class="question">
+      <p *ngIf="!member.units">{{member.name}}</p>
+      <p *ngIf="member.units">{{member.name}}&nbsp;({{member.units}})</p>
+      <p class="date-format" *ngIf="member.datatype ==='Date'">&nbsp;(DD/MM/YYYY)</p>
+      <p class="required" *ngIf="member.config && member.config.required">*</p>
   </div>
   <div class="answer">
-   <p class="notes-label">Notes&nbsp;</p>
-    <input class="horizontalLine"/>
-  </div>
+      <div [ngSwitch]="member.datatype">
+          <app-text-box *ngSwitchCase="'Text'" [member]="member"></app-text-box>
+          <app-text-box *ngSwitchCase="'Numeric'" [member]="member"></app-text-box>
+          <app-text-box *ngSwitchCase="'Date'" [member]="member"></app-text-box>
+          <app-text-box *ngSwitchCase="'Datetime'" [member]="member"></app-text-box>
+          <app-text-box *ngSwitchCase="'Coded'" [member]="member"></app-text-box>
+          <app-check-box *ngSwitchCase="'Boolean'"></app-check-box>
+          <button class="add-more" *ngIf="member.config && member.config.allowAddMore" disabled>[+]</button>
+        </div>
+      </div>
+    </div> 
+<div class="notes-table" *ngIf="(member.config && !member.config.disableAddNotes)||!member.config">
+    <div class="notes-label"><p>Notes&nbsp;</p></div>
+    <div class="notes-line"><input class="horizontalLine"/></div>
 </div>

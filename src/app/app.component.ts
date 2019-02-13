@@ -18,6 +18,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.userService.getUserPrivileges().subscribe((response: Array<{ name: String }>) => {
       this.setPrivilegeStatus(response);
+    }, (error) => {
+      if ( error.status === 401 && error.ok === false ) {
+        window.location.pathname = Constants.BAHMNI_HOME_PAGE_PATH_NAME;
+      }
     });
   }
 

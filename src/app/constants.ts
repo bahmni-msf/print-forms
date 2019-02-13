@@ -9,5 +9,6 @@ export class Constants {
   public static BAHMNI_RESOURCE_URL = '&v=bahmni';
   public static CLINICAL_APP_CONFIG_FILE_PATH = '../bahmni_config/openmrs/apps/clinical/app.json';
   public static FORM_CONDITIONS_CONFIG_FILE_PATH = '../bahmni_config/openmrs/apps/clinical/formConditions.json';
+  public static BAHMNI_HOME_PAGE_PATH_NAME = '/bahmni/home/index.html';
 }
 

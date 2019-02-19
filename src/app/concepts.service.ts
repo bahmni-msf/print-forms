@@ -24,6 +24,10 @@ export class ConceptsService {
   }
 
   getFormConditionsConfig() {
-    return this.http.get(Constants.FORM_CONDITIONS_CONFIG_FILE_PATH);
+    return this.http.get(Constants.FORM_CONDITIONS_CONFIG_FILE_PATH, {responseType: 'text'});
+  }
+
+  getImplementationFormConditionsConfig() {
+     return this.http.get(Constants.IMPLEMENTATION_FORM_CONDITIONS_CONFIG_FILE_PATH, {responseType: 'text'});
   }
 }

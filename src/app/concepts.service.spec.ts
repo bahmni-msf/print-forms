@@ -51,4 +51,11 @@ describe('ConceptsService', () => {
     const testRequest = httpMock.expectOne(Constants.FORM_CONDITIONS_CONFIG_FILE_PATH);
     expect(testRequest.request.method).toBe('GET');
   });
+
+  it('should make http get call to get implementation form conditions config', function () {
+    service.getImplementationFormConditionsConfig().subscribe();
+
+    const testRequest = httpMock.expectOne(Constants.IMPLEMENTATION_FORM_CONDITIONS_CONFIG_FILE_PATH);
+    expect(testRequest.request.method).toBe('GET');
+  });
 });

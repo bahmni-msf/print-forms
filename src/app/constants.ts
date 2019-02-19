@@ -8,7 +8,8 @@ export class Constants {
   public static FORM_DETAILS_URL = 'concept?s=byFullySpecifiedName&locale=en&name=';
   public static BAHMNI_RESOURCE_URL = '&v=bahmni';
   public static CLINICAL_APP_CONFIG_FILE_PATH = '../bahmni_config/openmrs/apps/clinical/app.json';
-  public static FORM_CONDITIONS_CONFIG_FILE_PATH = '../bahmni_config/openmrs/apps/clinical/formConditions.json';
+  public static FORM_CONDITIONS_CONFIG_FILE_PATH = '../bahmni_config/openmrs/apps/clinical/formConditions.js';
+  public static IMPLEMENTATION_FORM_CONDITIONS_CONFIG_FILE_PATH = '../implementation_config/openmrs/apps/clinical/formConditions.js';
   public static BAHMNI_HOME_PAGE_PATH_NAME = '/bahmni/home/index.html';
 }
 

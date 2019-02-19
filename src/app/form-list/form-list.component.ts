@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConceptsService } from '../concepts.service';
+import { parseFormConditions } from 'parse-form-conditions';
 
 let formConditions: any;
 
@@ -22,10 +23,20 @@ export class FormListComponent implements OnInit {
   }
 
   private getFormConditions() {
-    this.conceptService.getFormConditionsConfig().subscribe((response) => {
-      if (response) {
-        formConditions = response;
+    this.conceptService.getFormConditionsConfig().subscribe((bahmniConfigResponse: any) => {
+      let bahmniFormConditions = [];
+      let implementationFormConditions = [];
+      if (bahmniConfigResponse) {
+        bahmniFormConditions = parseFormConditions(bahmniConfigResponse);
       }
+      this.conceptService.getImplementationFormConditionsConfig().subscribe((implementationConfigResponse: any) => {
+        if (implementationConfigResponse) {
+          implementationFormConditions = parseFormConditions(bahmniConfigResponse);
+        }
+        formConditions = Object.assign({}, bahmniFormConditions, implementationFormConditions);
+      }, () => {
+          formConditions = bahmniFormConditions;
+      });
     });
   }
 

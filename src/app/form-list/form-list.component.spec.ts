@@ -7,6 +7,7 @@ import { ConceptsService } from '../concepts.service';
 import { instance, mock, verify, when } from 'ts-mockito';
 import { from, Observable } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import * as Parser from 'parse-form-conditions';
 
 describe('FormListComponent', () => {
   let component: FormListComponent;
@@ -95,13 +96,27 @@ describe('FormListComponent', () => {
   });
 
   it('should have list of formConditions, when httpResponse have data on app initialization', () => {
-    const testResponse = from([{
+    const testResponse = from(JSON.stringify([{
         condition: 'condition',
         conceptsToShow: [],
         nestedConditions: [],
         conceptsToHide: []
-    }]);
-    when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(testResponse);
+    }]));
+    when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(from('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
+      '"FSTG, Outcomes for 1st stage ' +
+      'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
+      '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
+      'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
+      '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
+      '}\r\n};\r\n'));
+    when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(from('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
+      '"FSTG, Outcomes for 1st stage ' +
+      'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
+      '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
+      'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
+      '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
+      '}\r\n};\r\n'));
+    spyOn(Parser, 'parseFormConditions').and.returnValue(testResponse).and.returnValue([]);
 
     component.ngOnInit();
 

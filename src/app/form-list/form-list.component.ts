@@ -31,7 +31,7 @@ export class FormListComponent implements OnInit {
       }
       this.conceptService.getImplementationFormConditionsConfig().subscribe((implementationConfigResponse: any) => {
         if (implementationConfigResponse) {
-          implementationFormConditions = parseFormConditions(bahmniConfigResponse);
+          implementationFormConditions = parseFormConditions(implementationConfigResponse);
         }
         formConditions = Object.assign({}, bahmniFormConditions, implementationFormConditions);
       }, () => {

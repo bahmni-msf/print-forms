@@ -23,6 +23,7 @@ export class FormListComponent implements OnInit {
   }
 
   private getFormConditions() {
+    formConditions = undefined;
     this.conceptService.getFormConditionsConfig().subscribe((bahmniConfigResponse: any) => {
       let bahmniFormConditions = [];
       let implementationFormConditions = [];

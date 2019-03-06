@@ -5,17 +5,19 @@ import { FilterPipe } from '../filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { ConceptsService } from '../concepts.service';
 import { instance, mock, verify, when } from 'ts-mockito';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import * as Parser from 'parse-form-conditions';
 
 describe('FormListComponent', () => {
   let component: FormListComponent;
   let fixture: ComponentFixture<FormListComponent>;
-  const ConceptServiceMock: ConceptsService = mock(ConceptsService);
-  const conceptServiceMock: ConceptsService = instance(ConceptServiceMock);
+  let ConceptServiceMock: ConceptsService;
+  let conceptServiceMock: ConceptsService;
 
   beforeEach(async(() => {
+    ConceptServiceMock = mock(ConceptsService);
+    conceptServiceMock = instance(ConceptServiceMock);
     TestBed.configureTestingModule({
       imports: [FormsModule, RouterTestingModule],
       declarations: [FormListComponent, FilterPipe],
@@ -95,36 +97,188 @@ describe('FormListComponent', () => {
     expect(formConditions).toBeUndefined();
   });
 
-  it('should have list of formConditions, when httpResponse have data on app initialization', () => {
-    const testResponse = from(JSON.stringify([{
-        condition: 'condition',
-        conceptsToShow: [],
-        nestedConditions: [],
-        conceptsToHide: []
-    }]));
-    when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(from('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
-      '"FSTG, Outcomes for 1st stage ' +
-      'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
-      '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
-      'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
-      '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
-      '}\r\n};\r\n'));
-    when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(from('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
-      '"FSTG, Outcomes for 1st stage ' +
-      'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
-      '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
-      'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
-      '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
-      '}\r\n};\r\n'));
-    spyOn(Parser, 'parseFormConditions').and.returnValue(testResponse).and.returnValue([]);
+  it('should return only bahmni config form conditions when there is no implementation config form conditions',
+    function () {
+      when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(of('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
+        '"FSTG, Outcomes for 1st stage ' +
+        'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
+        '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
+        'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
+        '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
+        '}\r\n};\r\n'));
+      when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(of(''));
+      const bahmniFormConditionsJSON = {
+        'conceptA': {
+          condition: 'condition',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      spyOn(Parser, 'parseFormConditions').and.returnValue(bahmniFormConditionsJSON);
 
-    component.ngOnInit();
+      component.ngOnInit();
 
-    expect(formConditions.toString()).toEqual([{
-      condition: 'condition',
-      conceptsToShow: [],
-      nestedConditions: [],
-      conceptsToHide: []
-    }].toString());
-  });
+      verify(ConceptServiceMock.getFormConditionsConfig()).once();
+      verify(ConceptServiceMock.getImplementationFormConditionsConfig()).once();
+      expect(Parser.parseFormConditions).toHaveBeenCalled();
+      expect(formConditions).toEqual(bahmniFormConditionsJSON);
+    });
+
+  it('should return only implementation config form conditions when there is no bahmni config form conditions',
+    function () {
+      when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(of(''));
+      when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(of('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
+        '"FSTG, Outcomes for 1st stage ' +
+        'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
+        '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
+        'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
+        '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
+        '}\r\n};\r\n'));
+      const implementationFormConditionsJSON = {
+        'conceptA': {
+          condition: 'condition',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      spyOn(Parser, 'parseFormConditions').and.returnValue(implementationFormConditionsJSON);
+
+      component.ngOnInit();
+
+      verify(ConceptServiceMock.getFormConditionsConfig()).once();
+      verify(ConceptServiceMock.getImplementationFormConditionsConfig()).once();
+      expect(Parser.parseFormConditions).toHaveBeenCalled();
+      expect(formConditions).toEqual(implementationFormConditionsJSON);
+    });
+
+  it('should merge bahmni and implementation form conditions',
+    function () {
+      when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(of('Bahmni.ConceptSet.FormConditions.rules = {\\r\\n    \' +\n' +
+        '        \'"FSTG, Outcomes for 1st stage \' +\n' +
+        '        \'surgical validation": function(formName, formFieldValues) {\\r\\n        let conditions = {\\r\\n      \' +\n' +
+        '        \'      show: [],\\r\\n            hide: []\\r\\n        };\\r\\n        let conditionConcept = \' +\n' +
+        '        \'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\\r\\n        let count= 0;\' +\n' +
+        '        \'\\r\\n        if (count-- == 0) {\\r\\n            \\r\\n        }\\r\\n        return conditions;\\r\\n    \' +\n' +
+        '        \'}\\r\\n};\\r\\n'));
+      when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(of('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
+        '"FSTG, Outcomes for 1st stage ' +
+        'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
+        '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
+        'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
+        '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
+        '}\r\n};\r\n'));
+
+      const bahmniFormConditionsJSON = {
+        'conceptA': {
+          condition: 'condition',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      const implementationFormConditionsJSON = {
+        'conceptB': {
+          condition: 'condition',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      const expectedFormConditions = {
+        'conceptA': {
+          condition: 'condition',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        },
+        'conceptB': {
+          condition: 'condition',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      spyOn(Parser, 'parseFormConditions').and.returnValues(bahmniFormConditionsJSON, implementationFormConditionsJSON);
+
+      component.ngOnInit();
+
+      verify(ConceptServiceMock.getFormConditionsConfig()).once();
+      verify(ConceptServiceMock.getImplementationFormConditionsConfig()).once();
+      expect(Parser.parseFormConditions).toHaveBeenCalledTimes(2);
+      expect(formConditions).toEqual(expectedFormConditions);
+    });
+
+  it('should replace bahmni form conditions when there is same concept in implementation form conditions',
+    function () {
+      when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(of('Bahmni.ConceptSet.FormConditions.rules = {\\r\\n    \' +\n' +
+        '        \'"FSTG, Outcomes for 1st stage \' +\n' +
+        '        \'surgical validation": function(formName, formFieldValues) {\\r\\n        let conditions = {\\r\\n      \' +\n' +
+        '        \'      show: [],\\r\\n            hide: []\\r\\n        };\\r\\n        let conditionConcept = \' +\n' +
+        '        \'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\\r\\n        let count= 0;\' +\n' +
+        '        \'\\r\\n        if (count-- == 0) {\\r\\n            \\r\\n        }\\r\\n        return conditions;\\r\\n    \' +\n' +
+        '        \'}\\r\\n};\\r\\n'));
+      when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(of('Bahmni.ConceptSet.FormConditions.rules = {\r\n    ' +
+        '"FSTG, Outcomes for 1st stage ' +
+        'surgical validation": function(formName, formFieldValues) {\r\n        let conditions = {\r\n      ' +
+        '      show: [],\r\n            hide: []\r\n        };\r\n        let conditionConcept = ' +
+        'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\r\n        let count= 0;' +
+        '\r\n        if (count-- == 0) {\r\n            \r\n        }\r\n        return conditions;\r\n    ' +
+        '}\r\n};\r\n'));
+
+      const bahmniFormConditionsJSON = {
+        'conceptA': {
+          condition: 'conditionOne',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      const implementationFormConditionsJSON = {
+        'conceptA': {
+          condition: 'conditionTwo',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      spyOn(Parser, 'parseFormConditions').and.returnValues(bahmniFormConditionsJSON, implementationFormConditionsJSON);
+
+      component.ngOnInit();
+
+      verify(ConceptServiceMock.getFormConditionsConfig()).once();
+      verify(ConceptServiceMock.getImplementationFormConditionsConfig()).once();
+      expect(Parser.parseFormConditions).toHaveBeenCalledTimes(2);
+      expect(formConditions).toEqual(implementationFormConditionsJSON);
+    });
+
+  it('should return only bahmni form conditions when implementation config response failed',
+    function () {
+      when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(of('Bahmni.ConceptSet.FormConditions.rules = {\\r\\n    \' +\n' +
+        '        \'"FSTG, Outcomes for 1st stage \' +\n' +
+        '        \'surgical validation": function(formName, formFieldValues) {\\r\\n        let conditions = {\\r\\n      \' +\n' +
+        '        \'      show: [],\\r\\n            hide: []\\r\\n        };\\r\\n        let conditionConcept = \' +\n' +
+        '        \'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\\r\\n        let count= 0;\' +\n' +
+        '        \'\\r\\n        if (count-- == 0) {\\r\\n            \\r\\n        }\\r\\n        return conditions;\\r\\n    \' +\n' +
+        '        \'}\\r\\n};\\r\\n'));
+      when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(throwError('implementation config failed'));
+
+      const bahmniFormConditionsJSON = {
+        'conceptA': {
+          condition: 'conditionOne',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      spyOn(Parser, 'parseFormConditions').and.returnValue(bahmniFormConditionsJSON);
+
+      component.ngOnInit();
+
+      verify(ConceptServiceMock.getFormConditionsConfig()).once();
+      verify(ConceptServiceMock.getImplementationFormConditionsConfig()).once();
+      expect(Parser.parseFormConditions).toHaveBeenCalledTimes(1);
+      expect(formConditions).toEqual(bahmniFormConditionsJSON);
+    });
 });

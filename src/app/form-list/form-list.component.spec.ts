@@ -281,4 +281,47 @@ describe('FormListComponent', () => {
       expect(Parser.parseFormConditions).toHaveBeenCalledTimes(1);
       expect(formConditions).toEqual(bahmniFormConditionsJSON);
     });
+
+  it('should return only implementation form conditions when bahmni config response failed',
+    function () {
+      when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(throwError('bahmni config failed'));
+      when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(of(
+        'Bahmni.ConceptSet.FormConditions.rules = {\\r\\n    \' +\n        \'"FSTG, Outcomes for 1st stage \' +\n' +
+        '        \'surgical validation": function(formName, formFieldValues) {\\r\\n        let conditions = {\\r\\n      \' +\n' +
+        '        \'      show: [],\\r\\n            hide: []\\r\\n        };\\r\\n        let conditionConcept = \' +\n' +
+        '        \'formFieldValues[ "FSTG, Outcomes for 1st stage surgical validation" ];\\r\\n        let count= 0;\' +\n' +
+        '        \'\\r\\n        if (count-- == 0) {\\r\\n            \\r\\n        }\\r\\n        return conditions;\\r\\n    \' +\n' +
+        '        \'}\\r\\n};\\r\\n'));
+
+      const implementationFormConditionsJSON = {
+        'conceptA': {
+          condition: 'conditionOne',
+          conceptsToShow: [],
+          nestedConditions: [],
+          conceptsToHide: []
+        }
+      };
+      spyOn(Parser, 'parseFormConditions').and.returnValue(implementationFormConditionsJSON);
+
+      component.ngOnInit();
+
+      verify(ConceptServiceMock.getFormConditionsConfig()).once();
+      verify(ConceptServiceMock.getImplementationFormConditionsConfig()).once();
+      expect(Parser.parseFormConditions).toHaveBeenCalledTimes(1);
+      expect(formConditions).toEqual(implementationFormConditionsJSON);
+    });
+
+  it('should return form conditions as undefined when bahmni config & implementation config responses failed',
+    function () {
+      when(ConceptServiceMock.getFormConditionsConfig()).thenReturn(throwError('bahmni config failed'));
+      when(ConceptServiceMock.getImplementationFormConditionsConfig()).thenReturn(throwError('implementation config failed'));
+      spyOn(Parser, 'parseFormConditions');
+
+      component.ngOnInit();
+
+      verify(ConceptServiceMock.getFormConditionsConfig()).once();
+      verify(ConceptServiceMock.getImplementationFormConditionsConfig()).once();
+      expect(Parser.parseFormConditions).not.toHaveBeenCalled();
+      expect(formConditions).toBeUndefined();
+    });
 });

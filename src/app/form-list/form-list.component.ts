@@ -22,30 +22,34 @@ export class FormListComponent implements OnInit {
     this.getFormConditions();
   }
 
-  private getFormConditions() {
-    formConditions = undefined;
-    this.conceptService.getFormConditionsConfig().subscribe((bahmniConfigResponse: any) => {
-      let bahmniFormConditions = [];
-      let implementationFormConditions = [];
-      if (bahmniConfigResponse) {
-        bahmniFormConditions = parseFormConditions(bahmniConfigResponse);
-      }
-      this.conceptService.getImplementationFormConditionsConfig().subscribe((implementationConfigResponse: any) => {
-        if (implementationConfigResponse) {
-          implementationFormConditions = parseFormConditions(implementationConfigResponse);
-        }
-        formConditions = Object.assign({}, bahmniFormConditions, implementationFormConditions);
-      }, () => {
-          formConditions = bahmniFormConditions;
-      });
-    });
-  }
-
   private getAllObservationTemplates() {
     this.conceptService.getAllObservationTemplates().subscribe((response: { results: any }) => {
       if (response.results[0]) {
         this.formNames = response.results[0].setMembers.map((form) => form.display);
       }
+    });
+  }
+
+  private getFormConditions() {
+    formConditions = undefined;
+    this.conceptService.getFormConditionsConfig().subscribe((bahmniConfigResponse: any) => {
+      if (bahmniConfigResponse) {
+        formConditions = parseFormConditions(bahmniConfigResponse);
+      }
+      this.updateFormConditionsWithImplementationFormConditions();
+    }, () => {
+      this.updateFormConditionsWithImplementationFormConditions();
+    });
+  }
+
+  private updateFormConditionsWithImplementationFormConditions() {
+    this.conceptService.getImplementationFormConditionsConfig().subscribe((implementationConfigResponse: any) => {
+      let implementationFormConditions = {};
+      if (implementationConfigResponse) {
+        implementationFormConditions = parseFormConditions(implementationConfigResponse);
+      }
+      formConditions = Object.assign({}, formConditions, implementationFormConditions);
+    }, () => {
     });
   }
 }

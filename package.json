@@ -24,7 +24,7 @@
     "@angular/router": "^6.1.0",
     "angular-6-clipboard": "^1.0.1",
     "core-js": "^2.5.4",
-    "parse-form-conditions": "0.0.1",
+    "parse-form-conditions": "0.0.3",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },

@@ -15,7 +15,7 @@
             <button type="button" class="btn" [class.active]="!isFormSelected" (click)="setIsFormSelected(false)">Code Sheet</button>
             <button type="button" class="print-button" (click)="printForm()"><i class="fa fa-print" aria-hidden="true"></i></button>
           </div>
-          <div *ngIf="isFormSelected">
+          <div *ngIf="isFormSelected && formConditionsLoaded">
             <div *ngFor="let member of form.setMembers">
               <app-conditional-concept *ngIf="!member.set" [member]="member" [formConcepts]="form.setMembers"></app-conditional-concept>
               <app-concept-set *ngIf="member.set && !isTabular(member)" [member]="member" [formConcepts]="form.setMembers"></app-concept-set>

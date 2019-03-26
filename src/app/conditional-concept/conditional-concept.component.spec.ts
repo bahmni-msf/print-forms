@@ -5,7 +5,7 @@ import { ConceptComponent } from '../concept/concept.component';
 import { ConceptConditionComponent } from '../concept-condition/concept-condition.component';
 import { TextBoxComponent } from '../elements/text-box/text-box.component';
 import { CheckBoxComponent } from '../elements/check-box/check-box.component';
-import { formConditions } from '../form-list/form-list.component';
+import { formConditions } from '../form/form.component';
 import { FormElementsComponent } from '../form-elements/form-elements.component';
 import { TabularViewComponent } from '../tabular-view/tabular-view.component';
 import { ConceptSetComponent } from '../concept-set/concept-set.component';

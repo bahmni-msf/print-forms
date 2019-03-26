@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ConceptsService } from '../concepts.service';
-import { parseFormConditions } from 'parse-form-conditions';
-
-let formConditions: any;
 
 @Component({
   selector: 'app-form-list',
@@ -19,7 +16,6 @@ export class FormListComponent implements OnInit {
 
   ngOnInit() {
     this.getAllObservationTemplates();
-    this.getFormConditions();
   }
 
   private getAllObservationTemplates() {
@@ -29,29 +25,4 @@ export class FormListComponent implements OnInit {
       }
     });
   }
-
-  private getFormConditions() {
-    formConditions = undefined;
-    this.conceptService.getFormConditionsConfig().subscribe((bahmniConfigResponse: any) => {
-      if (bahmniConfigResponse) {
-        formConditions = parseFormConditions(bahmniConfigResponse);
-      }
-      this.updateFormConditionsWithImplementationFormConditions();
-    }, () => {
-      this.updateFormConditionsWithImplementationFormConditions();
-    });
-  }
-
-  private updateFormConditionsWithImplementationFormConditions() {
-    this.conceptService.getImplementationFormConditionsConfig().subscribe((implementationConfigResponse: any) => {
-      let implementationFormConditions = {};
-      if (implementationConfigResponse) {
-        implementationFormConditions = parseFormConditions(implementationConfigResponse);
-      }
-      formConditions = Object.assign({}, formConditions, implementationFormConditions);
-    }, () => {
-    });
-  }
 }
-
-export { formConditions };

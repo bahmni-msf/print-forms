@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { formConditions } from '../form-list/form-list.component';
+import { formConditions } from '../form/form.component';
 import { ConceptUtils } from '../utils/concept.utils';
 
 @Component({

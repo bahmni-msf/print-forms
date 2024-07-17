@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run:  npm install -g @angular/cli && npm install
       - name: run test
-        run:  npm run test
+        run:  ng test
       - name: Build
         run:  npm run build
       - name: Build docker image

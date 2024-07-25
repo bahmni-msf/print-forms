@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 10.9.0
       - name: install python
-      - run: sudo apt-get install python2.5
+        run: sudo apt-get install python2.5
       # - uses: actions/setup-python@v5
       #   with:
       #     python-version: '2.5.0'

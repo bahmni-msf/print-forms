@@ -13,6 +13,6 @@ rm -rf $ROOT_DIR/target/${ZIP_FILE_NAME}*.zip
 
 cd $ROOT_DIR
 npm install
-npm run-script build
+npm build
 
 cd dist && zip -r ../target/${ZIP_FILE_NAME}.zip *

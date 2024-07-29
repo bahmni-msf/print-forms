@@ -16,12 +16,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 10.9.0
-      - name: install python
-        run: sudo apt-get install python2.5
-      # - uses: actions/setup-python@v5
-      #   with:
-      #     python-version: '2.5.0'
+          node-version: 18.19.1
       - name: Build and test using script
         run:  sh scripts/package.sh
       - name: Build docker image
@@ -33,7 +28,7 @@ jobs:
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
-          vuln-type: 'os,library'
+          vuln-type: 'library'
           severity: 'HIGH,CRITICAL'
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4

@@ -13,13 +13,11 @@ jobs:
       - name: Pull Github code
         uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v1
-      - name: Install dependencies
-        run:  npm install -g @angular/cli && npm install
-      - name: run test
-        run:  ng test
-      - name: Build
-        run:  npm run build
+        uses: actions/setup-node@v4
+        with:
+          node-version: 10.9.0
+      - name: Build and test using script
+        run:  sh scripts/package.sh
       - name: Build docker image
         run: docker build -t print-forms:latest -f package/docker/Dockerfile .
       - name: Run Trivy vulnerability scanner

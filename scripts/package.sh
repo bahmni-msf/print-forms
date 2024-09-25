@@ -13,6 +13,6 @@ rm -rf $ROOT_DIR/target/${ZIP_FILE_NAME}*.zip
 
 cd $ROOT_DIR
 npm install
-ng build
+npm run-script build
 
 cd dist && zip -r ../target/${ZIP_FILE_NAME}.zip *

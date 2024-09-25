@@ -13,7 +13,9 @@ jobs:
       - name: Pull Github code
         uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
       - name: Install dependencies
         run:  npm install -g @angular/cli && npm install
       - name: run test
